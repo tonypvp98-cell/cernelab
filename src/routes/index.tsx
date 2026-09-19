@@ -71,9 +71,6 @@ const products: Product[] = [
     alt: "Painel do Finanças & Metas em uma moldura digital",
     link: "https://whop.com/cernelab/financas-metas-acesso-vitalicio/",
     frame: "desktop",
-    // Insira uma URL em demoVideo ou demoGif para ativar a demonstração em loop.
-    demoVideo: undefined,
-    demoGif: undefined,
   },
   {
     name: "Ironform",
@@ -87,8 +84,6 @@ const products: Product[] = [
     alt: "Telas do Ironform em molduras digitais",
     link: "https://whop.com/cernelab/ironform-gym-ai-coach/",
     frame: "mobile",
-    demoVideo: undefined,
-    demoGif: undefined,
   },
 ];
 
