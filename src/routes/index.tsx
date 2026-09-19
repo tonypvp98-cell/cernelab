@@ -5,6 +5,7 @@ import {
   Infinity as InfinityIcon,
   ShieldCheck,
   ArrowUpRight,
+  Instagram,
 } from "lucide-react";
 import {
   Accordion,
@@ -12,8 +13,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ironformCover from "@/assets/ironform-cover.jpg";
-import financasCover from "@/assets/financas-cover.jpg";
+import ironformCover from "@/assets/ironform-studio-cover.jpg";
+import financasCover from "@/assets/financas-studio-cover.jpg";
 import cerneLogo from "@/assets/cerne-logo.png";
 import cerneBanner from "@/assets/cerne-lab-banner.png.asset.json";
 
@@ -28,6 +29,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -42,7 +45,7 @@ const products = [
       "Organize gastos, defina metas e veja seu dinheiro trabalhar com painéis claros e alertas automáticos.",
     price: "R$ 25,00",
     cover: financasCover,
-    alt: "Tela real do aplicativo Finanças & Metas com dashboard, caixa atual e progresso da meta principal",
+    alt: "Finanças & Metas aberto em um notebook sobre uma mesa de estúdio",
     link: "https://whop.com/cernelab/financas-metas-acesso-vitalicio/",
   },
   {
@@ -53,7 +56,7 @@ const products = [
       "Treinos personalizados por IA, acompanhamento de cargas e evolução em tempo real — seu personal no bolso.",
     price: "R$ 25,00",
     cover: ironformCover,
-    alt: "Telas reais do aplicativo Ironform com plano semanal e sessão de treino ativa",
+    alt: "Ironform aberto em dois celulares sobre um banco de academia",
     link: "https://whop.com/cernelab/ironform-gym-ai-coach/",
   },
 ];
@@ -131,12 +134,14 @@ function Header() {
           </span>
         </a>
         <a
-          href="#catalogo"
+          href="https://www.instagram.com/cerne_lab?stkn=Ym9nZW02cWJvc2hl&utm_source=qr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Falar com a Cerne Lab pelo Instagram"
           className="glass glow-border inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium"
         >
-          <span className="hidden sm:inline">Ver aplicativos</span>
-          <span className="sm:hidden">Apps</span>
-          <ArrowUpRight className="h-4 w-4 text-neon" />
+          <Instagram className="h-4 w-4 text-neon" />
+          <span>Contato</span>
         </a>
       </div>
     </header>
@@ -314,6 +319,15 @@ function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:justify-between sm:px-8">
         <p>© {new Date().getFullYear()} Cerne Lab. Todos os direitos reservados.</p>
         <nav className="flex items-center gap-6">
+          <a
+            href="https://www.instagram.com/cerne_lab?stkn=Ym9nZW02cWJvc2hl&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 transition-colors hover:text-neon"
+          >
+            <Instagram className="h-4 w-4" />
+            Instagram
+          </a>
           <a href="#" className="transition-colors hover:text-neon">
             Termos de Uso
           </a>
