@@ -6,6 +6,10 @@ import {
   ShieldCheck,
   ArrowUpRight,
   Instagram,
+  Link2,
+  Share2,
+  Smartphone,
+  Mail,
 } from "lucide-react";
 import {
   Accordion,
@@ -13,8 +17,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ironformCover from "@/assets/ironform-studio-cover.jpg";
-import financasCover from "@/assets/financas-studio-cover.jpg";
+import ironformCover from "@/assets/ironform-cover.jpg";
+import financasCover from "@/assets/financas-cover.jpg";
 import cerneLogo from "@/assets/cerne-logo.png";
 import cerneBanner from "@/assets/cerne-lab-banner.png.asset.json";
 
@@ -36,17 +40,37 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const products = [
+const INSTAGRAM_URL =
+  "https://www.instagram.com/cerne_lab?stkn=Ym9nZW02cWJvc2hl&utm_source=qr";
+
+type Product = {
+  name: string;
+  tagline: string;
+  category: string;
+  description: string;
+  originalPrice: string;
+  price: string;
+  cover: string;
+  alt: string;
+  link: string;
+  frame: "desktop" | "mobile";
+  demoVideo?: string;
+  demoGif?: string;
+};
+
+const products: Product[] = [
   {
     name: "Finanças & Metas",
     tagline: "Controle financeiro inteligente",
     category: "Gestão Financeira",
     description:
       "Organize gastos, defina metas e veja seu dinheiro trabalhar com painéis claros e alertas automáticos.",
+    originalPrice: "R$ 31,25",
     price: "R$ 25,00",
     cover: financasCover,
-    alt: "Finanças & Metas aberto em um notebook sobre uma mesa de estúdio",
+    alt: "Painel do Finanças & Metas em uma moldura digital",
     link: "https://whop.com/cernelab/financas-metas-acesso-vitalicio/",
+    frame: "desktop",
   },
   {
     name: "Ironform",
@@ -54,10 +78,12 @@ const products = [
     category: "Fitness & Treino",
     description:
       "Treinos personalizados por IA, acompanhamento de cargas e evolução em tempo real — seu personal no bolso.",
+    originalPrice: "R$ 31,25",
     price: "R$ 25,00",
     cover: ironformCover,
-    alt: "Ironform aberto em dois celulares sobre um banco de academia",
+    alt: "Telas do Ironform em molduras digitais",
     link: "https://whop.com/cernelab/ironform-gym-ai-coach/",
+    frame: "mobile",
   },
 ];
 
@@ -95,6 +121,24 @@ const faqs = [
 ];
 
 const highlights = ["Acesso Imediato", "Sem Mensalidades", "Funciona em Qualquer Dispositivo"];
+
+const pwaSteps = [
+  {
+    icon: Link2,
+    title: "Acesse o Link",
+    text: "Clique no link enviado imediatamente após a compra na Whop.",
+  },
+  {
+    icon: Share2,
+    title: "Adicione à Tela Inicial",
+    text: 'No Safari ou Chrome, toque em “Compartilhar” e selecione “Adicionar à Tela Inicial”.',
+  },
+  {
+    icon: Smartphone,
+    title: "Acesso Vitalício",
+    text: "O app fica instalado como um aplicativo nativo, sem ocupar espaço da memória e sem depender de lojas.",
+  },
+];
 
 function Index() {
   return (
@@ -134,14 +178,14 @@ function Header() {
           </span>
         </a>
         <a
-          href="https://www.instagram.com/cerne_lab?stkn=Ym9nZW02cWJvc2hl&utm_source=qr"
+          href={INSTAGRAM_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Falar com a Cerne Lab pelo Instagram"
           className="glass glow-border inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium"
         >
           <Instagram className="h-4 w-4 text-neon" />
-          <span>Contato</span>
+          <span className="hidden sm:inline">Suporte via Instagram</span>
         </a>
       </div>
     </header>
@@ -215,15 +259,8 @@ function Catalog() {
             key={p.name}
             className="glass glow-border group flex flex-col overflow-hidden rounded-3xl"
           >
-            <div className="relative aspect-[16/10] overflow-hidden border-b border-glass-border">
-              <img
-                src={p.cover}
-                alt={p.alt}
-                width={1024}
-                height={640}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              />
+            <div className="relative aspect-[16/10] overflow-hidden border-b border-glass-border bg-secondary/40">
+              <ProductMedia product={p} />
               <span className="absolute left-4 top-4 rounded-full border border-neon/40 bg-background/70 px-3 py-1 text-xs font-semibold text-neon backdrop-blur-md">
                 {p.category}
               </span>
@@ -238,11 +275,14 @@ function Catalog() {
                 {p.description}
               </p>
 
-              <div className="mt-6 flex items-end justify-between gap-4">
-                <div>
-                  <p className="text-3xl font-extrabold tracking-tight">{p.price}</p>
-                  <p className="text-xs font-medium text-muted-foreground">Acesso Vitalício</p>
+              <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="text-sm text-muted-foreground line-through">De {p.originalPrice}</p>
+                  <p className="mt-0.5 text-3xl font-extrabold text-neon">Por {p.price}</p>
                 </div>
+                <span className="rounded-full border border-neon/30 bg-neon/10 px-3 py-1.5 text-xs font-bold text-neon">
+                  20% OFF — Acesso Vitalício
+                </span>
               </div>
 
               <a
@@ -259,6 +299,54 @@ function Catalog() {
         ))}
       </div>
     </section>
+  );
+}
+
+function ProductMedia({ product }: { product: Product }) {
+  const mediaSource = product.demoGif ?? product.cover;
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-tech-grid px-5 py-7 sm:px-8 sm:py-8">
+      <div
+        className={
+          product.frame === "desktop"
+            ? "relative aspect-[16/10] max-h-full w-full max-w-[92%] overflow-hidden rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            : "relative aspect-[16/10] max-h-full w-full overflow-hidden rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+        }
+      >
+        {product.frame === "desktop" && (
+          <span className="absolute left-1/2 top-1 z-20 h-1 w-10 -translate-x-1/2 rounded-full bg-muted" />
+        )}
+        <img
+          src={mediaSource}
+          alt={product.alt}
+          width={1024}
+          height={640}
+          loading="lazy"
+          onError={(event) => {
+            if (event.currentTarget.src !== product.cover) event.currentTarget.src = product.cover;
+          }}
+          className="h-full w-full rounded-lg object-cover"
+        />
+        {product.demoVideo && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={product.cover}
+            aria-label={`Demonstração do ${product.name}`}
+            onLoadedData={(event) => event.currentTarget.classList.remove("opacity-0")}
+            className="absolute inset-1.5 z-10 h-[calc(100%-0.75rem)] w-[calc(100%-0.75rem)] rounded-lg object-cover opacity-0 transition-opacity duration-500"
+          >
+            <source src={product.demoVideo} />
+          </video>
+        )}
+        {product.frame === "desktop" && (
+          <span className="absolute -bottom-2 left-1/2 h-2 w-[108%] -translate-x-1/2 rounded-b-xl border-x border-b border-glass-border bg-muted" />
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -281,6 +369,30 @@ function Benefits() {
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-16 border-y border-glass-border py-10 sm:py-12">
+        <div className="mb-8 max-w-xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Como funciona</p>
+          <h3 className="mt-2 text-2xl font-bold sm:text-3xl">Do pagamento à sua tela em 3 passos</h3>
+        </div>
+        <ol className="grid gap-8 sm:grid-cols-3 sm:gap-0">
+          {pwaSteps.map(({ icon: Icon, title, text }, index) => (
+            <li
+              key={title}
+              className="relative flex gap-4 sm:block sm:border-l sm:border-glass-border sm:px-6 first:sm:border-l-0 first:sm:pl-0 last:sm:pr-0"
+            >
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-neon/30 bg-neon/10 text-neon">
+                <Icon className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 sm:mt-5">
+                <p className="text-xs font-bold uppercase text-neon">Passo {index + 1}</p>
+                <h4 className="mt-1 text-lg font-semibold">{title}</h4>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -316,24 +428,32 @@ function Faq() {
 function Footer() {
   return (
     <footer className="mt-12 border-t border-glass-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:justify-between sm:px-8">
-        <p>© {new Date().getFullYear()} Cerne Lab. Todos os direitos reservados.</p>
-        <nav className="flex items-center gap-6">
+      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 text-sm text-muted-foreground sm:grid-cols-[1fr_auto] sm:px-8">
+        <div>
+          <div className="flex items-center gap-2.5 text-foreground">
+            <img src={cerneLogo} alt="" className="h-9 w-auto" width={209} height={256} />
+            <span className="font-bold">Cerne <span className="text-neon">Lab</span></span>
+          </div>
+          <a href="mailto:contato@cernelab.com" className="mt-4 inline-flex items-center gap-2 transition-colors hover:text-neon">
+            <Mail className="h-4 w-4" />
+            contato@cernelab.com
+          </a>
+          <p className="mt-3">© 2026 Cerne Lab. Todos os direitos reservados.</p>
+        </div>
+        <nav className="flex flex-col items-start gap-3 sm:items-end">
           <a
-            href="https://www.instagram.com/cerne_lab?stkn=Ym9nZW02cWJvc2hl&utm_source=qr"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 transition-colors hover:text-neon"
+            className="glass glow-border inline-flex h-10 items-center gap-2 rounded-full px-4 font-medium text-foreground"
           >
-            <Instagram className="h-4 w-4" />
-            Instagram
+            <Instagram className="h-4 w-4 text-neon" />
+            Suporte via Instagram
           </a>
-          <a href="#" className="transition-colors hover:text-neon">
-            Termos de Uso
-          </a>
-          <a href="#" className="transition-colors hover:text-neon">
-            Política de Privacidade
-          </a>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <a href="#" className="transition-colors hover:text-neon">Termos de Uso</a>
+            <a href="#" className="transition-colors hover:text-neon">Política de Privacidade</a>
+          </div>
         </nav>
       </div>
     </footer>
