@@ -1,12 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Check,
-  Zap,
   Download,
   Infinity as InfinityIcon,
   ShieldCheck,
   ArrowUpRight,
-  LifeBuoy,
 } from "lucide-react";
 import {
   Accordion,
@@ -16,10 +14,12 @@ import {
 } from "@/components/ui/accordion";
 import ironformCover from "@/assets/ironform-cover.jpg";
 import financasCover from "@/assets/financas-cover.jpg";
+import cerneLogo from "@/assets/cerne-logo.png";
+import cerneBanner from "@/assets/cerne-lab-banner.png.asset.json";
 
-const TITLE = "Nexo Apps — Hub de Aplicativos PWA";
+const TITLE = "Cerne Lab — Hub de Aplicativos PWA";
 const DESCRIPTION =
-  "Aplicativos web (PWA) rápidos, sem instalação por loja e com acesso vitalício. Ferramentas inteligentes para elevar sua performance.";
+  "Soluções Digitais Essenciais: aplicativos web (PWA) rápidos, sem instalação por loja e com acesso vitalício. Finanças & Metas e Ironform — pague uma vez, use para sempre.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,16 +35,6 @@ export const Route = createFileRoute("/")({
 
 const products = [
   {
-    name: "Ironform",
-    tagline: "Gym & AI Coach",
-    category: "Fitness & Treino",
-    description:
-      "Treinos personalizados por IA, acompanhamento de cargas e evolução em tempo real — seu personal no bolso.",
-    price: "R$ 25,00",
-    cover: ironformCover,
-    alt: "Prévia do aplicativo Ironform com painéis de treino e coach de IA",
-  },
-  {
     name: "Finanças & Metas",
     tagline: "Controle financeiro inteligente",
     category: "Gestão Financeira",
@@ -52,7 +42,19 @@ const products = [
       "Organize gastos, defina metas e veja seu dinheiro trabalhar com painéis claros e alertas automáticos.",
     price: "R$ 25,00",
     cover: financasCover,
-    alt: "Prévia do aplicativo Finanças & Metas com gráficos e metas de economia",
+    alt: "Tela real do aplicativo Finanças & Metas com dashboard, caixa atual e progresso da meta principal",
+    link: "https://whop.com/cernelab/financas-metas-acesso-vitalicio/",
+  },
+  {
+    name: "Ironform",
+    tagline: "Gym & AI Coach",
+    category: "Fitness & Treino",
+    description:
+      "Treinos personalizados por IA, acompanhamento de cargas e evolução em tempo real — seu personal no bolso.",
+    price: "R$ 25,00",
+    cover: ironformCover,
+    alt: "Telas reais do aplicativo Ironform com plano semanal e sessão de treino ativa",
+    link: "https://whop.com/cernelab/ironform-gym-ai-coach/",
   },
 ];
 
@@ -117,20 +119,24 @@ function Header() {
     <header className="sticky top-0 z-50 border-b border-glass-border bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#" className="flex min-w-0 items-center gap-2.5">
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-neon text-primary-foreground shadow-neon">
-            <Zap className="h-4 w-4" strokeWidth={2.5} />
-          </span>
+          <img
+            src={cerneLogo}
+            alt="Logotipo da Cerne Lab"
+            className="h-9 w-auto shrink-0"
+            width={209}
+            height={256}
+          />
           <span className="truncate text-base font-bold tracking-tight">
-            Nexo<span className="text-neon">Apps</span>
+            Cerne<span className="text-neon"> Lab</span>
           </span>
         </a>
         <a
-          href="mailto:suporte@nexoapps.com"
+          href="#catalogo"
           className="glass glow-border inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium"
         >
-          <LifeBuoy className="h-4 w-4 text-neon" />
-          <span className="hidden sm:inline">Suporte / Contato</span>
-          <span className="sm:hidden">Suporte</span>
+          <span className="hidden sm:inline">Ver aplicativos</span>
+          <span className="sm:hidden">Apps</span>
+          <ArrowUpRight className="h-4 w-4 text-neon" />
         </a>
       </div>
     </header>
@@ -145,7 +151,7 @@ function Hero() {
         Ecossistema de apps PWA
       </span>
       <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
-        Ferramentas Inteligentes para{" "}
+        Soluções Digitais Essenciais para{" "}
         <span className="text-neon text-glow">Elevar sua Performance</span>
       </h1>
       <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
@@ -170,6 +176,17 @@ function Hero() {
         Ver aplicativos
         <ArrowUpRight className="h-4 w-4" />
       </a>
+
+      <div className="glass glow-border mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl">
+        <img
+          src={cerneBanner.url}
+          alt="Banner da Cerne Lab — Soluções Digitais Essenciais"
+          width={1999}
+          height={998}
+          loading="lazy"
+          className="h-auto w-full"
+        />
+      </div>
     </section>
   );
 }
@@ -224,7 +241,9 @@ function Catalog() {
               </div>
 
               <a
-                href="#"
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-neon mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl text-sm font-semibold"
               >
                 Garantir Acesso
@@ -293,7 +312,7 @@ function Footer() {
   return (
     <footer className="mt-12 border-t border-glass-border">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:justify-between sm:px-8">
-        <p>© {new Date().getFullYear()} NexoApps. Todos os direitos reservados.</p>
+        <p>© {new Date().getFullYear()} Cerne Lab. Todos os direitos reservados.</p>
         <nav className="flex items-center gap-6">
           <a href="#" className="transition-colors hover:text-neon">
             Termos de Uso
