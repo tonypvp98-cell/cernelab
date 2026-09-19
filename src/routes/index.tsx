@@ -306,12 +306,13 @@ function ProductMedia({ product }: { product: Product }) {
   const mediaSource = product.demoGif ?? product.cover;
 
   return (
-    <div className="flex h-full items-center justify-center bg-tech-grid p-5 pb-6 sm:p-6 sm:pb-8">
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden p-5 sm:p-6">
+      <div aria-hidden="true" className="absolute inset-0 bg-tech-grid" />
       <div
         className={
           product.frame === "desktop"
-            ? "relative mb-2 aspect-[16/10] max-h-full w-full max-w-[92%] overflow-hidden rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
-            : "relative mb-2 aspect-[16/10] max-h-full w-full overflow-hidden rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            ? "relative z-10 aspect-[16/10] max-h-[calc(100%-1.5rem)] w-full max-w-[92%] overflow-hidden rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            : "relative z-10 aspect-[16/10] max-h-[calc(100%-1.5rem)] w-full overflow-hidden rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
         }
       >
         {product.frame === "desktop" && (
