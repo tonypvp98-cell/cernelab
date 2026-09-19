@@ -259,7 +259,7 @@ function Catalog() {
             key={p.name}
             className="glass glow-border group flex flex-col overflow-hidden rounded-3xl"
           >
-            <div className="relative aspect-[16/10] overflow-hidden border-b border-glass-border bg-secondary/40">
+            <div className="relative aspect-video border-b border-glass-border bg-secondary/40">
               <ProductMedia product={p} />
               <span className="absolute left-4 top-4 rounded-full border border-neon/40 bg-background/70 px-3 py-1 text-xs font-semibold text-neon backdrop-blur-md">
                 {p.category}
@@ -306,12 +306,12 @@ function ProductMedia({ product }: { product: Product }) {
   const mediaSource = product.demoGif ?? product.cover;
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-tech-grid px-5 py-7 sm:px-8 sm:py-8">
+    <div className="flex h-full items-center justify-center bg-tech-grid p-5 pb-6 sm:p-6 sm:pb-8">
       <div
         className={
           product.frame === "desktop"
-            ? "relative aspect-[16/10] max-h-full w-full max-w-[92%] overflow-hidden rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
-            : "relative aspect-[16/10] max-h-full w-full overflow-hidden rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            ? "relative mb-2 aspect-[16/10] max-h-full w-full max-w-[92%] overflow-hidden rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            : "relative mb-2 aspect-[16/10] max-h-full w-full overflow-hidden rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
         }
       >
         {product.frame === "desktop" && (
@@ -326,7 +326,7 @@ function ProductMedia({ product }: { product: Product }) {
           onError={(event) => {
             if (event.currentTarget.src !== product.cover) event.currentTarget.src = product.cover;
           }}
-          className="h-full w-full rounded-lg object-cover"
+          className="h-full w-full rounded-lg object-contain"
         />
         {product.demoVideo && (
           <video
@@ -337,7 +337,7 @@ function ProductMedia({ product }: { product: Product }) {
             poster={product.cover}
             aria-label={`Demonstração do ${product.name}`}
             onLoadedData={(event) => event.currentTarget.classList.remove("opacity-0")}
-            className="absolute inset-1.5 z-10 h-[calc(100%-0.75rem)] w-[calc(100%-0.75rem)] rounded-lg object-cover opacity-0 transition-opacity duration-500"
+            className="absolute inset-1.5 z-10 h-[calc(100%-0.75rem)] w-[calc(100%-0.75rem)] rounded-lg object-contain opacity-0 transition-opacity duration-500"
           >
             <source src={product.demoVideo} />
           </video>
