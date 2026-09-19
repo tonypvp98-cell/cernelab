@@ -310,8 +310,8 @@ function ProductMedia({ product }: { product: Product }) {
       <div
         className={
           product.frame === "desktop"
-            ? "relative w-full max-w-[92%] rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
-            : "relative h-full w-full rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            ? "relative aspect-[16/10] max-h-full w-full max-w-[92%] overflow-hidden rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            : "relative aspect-[16/10] max-h-full w-full overflow-hidden rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
         }
       >
         {product.frame === "desktop" && (
@@ -326,7 +326,7 @@ function ProductMedia({ product }: { product: Product }) {
           onError={(event) => {
             if (event.currentTarget.src !== product.cover) event.currentTarget.src = product.cover;
           }}
-          className="h-full w-full rounded-lg object-contain"
+          className="h-full w-full rounded-lg object-cover"
         />
         {product.demoVideo && (
           <video
@@ -337,7 +337,7 @@ function ProductMedia({ product }: { product: Product }) {
             poster={product.cover}
             aria-label={`Demonstração do ${product.name}`}
             onLoadedData={(event) => event.currentTarget.classList.remove("opacity-0")}
-            className="absolute inset-1.5 z-10 h-[calc(100%-0.75rem)] w-[calc(100%-0.75rem)] rounded-lg object-contain opacity-0 transition-opacity duration-500"
+            className="absolute inset-1.5 z-10 h-[calc(100%-0.75rem)] w-[calc(100%-0.75rem)] rounded-lg object-cover opacity-0 transition-opacity duration-500"
           >
             <source src={product.demoVideo} />
           </video>
