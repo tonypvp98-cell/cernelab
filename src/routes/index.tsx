@@ -512,6 +512,7 @@ function Comparison() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );
