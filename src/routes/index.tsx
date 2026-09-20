@@ -154,8 +154,9 @@ function Index() {
         <Hero />
         <Catalog />
         <Benefits />
-        <Guarantee />
         <Comparison />
+        <HowItWorks />
+        <Guarantee />
         <Faq />
       </main>
 
@@ -262,7 +263,7 @@ function Catalog() {
             key={p.name}
             className="glass glow-border group flex flex-col overflow-hidden rounded-3xl"
           >
-            <div className="relative border-b border-glass-border bg-secondary/40 px-2 pt-2 pb-4 sm:px-4 sm:pt-4 sm:pb-5">
+            <div className="relative border-b border-glass-border bg-secondary/40 p-3 sm:p-4">
               <ProductMedia product={p} />
               <span className="absolute left-4 top-4 rounded-full border border-neon/40 bg-background/70 px-3 py-1 text-xs font-semibold text-neon backdrop-blur-md">
                 {p.category}
@@ -375,7 +376,14 @@ function Benefits() {
         ))}
       </div>
 
-      <div className="mt-16 border-y border-glass-border py-10 sm:py-12">
+    </section>
+  );
+}
+
+function HowItWorks() {
+  return (
+    <section className="mx-auto max-w-6xl px-5 pb-4 sm:px-8">
+      <div className="border-y border-glass-border py-10 sm:py-12">
         <div className="mb-8 max-w-xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Como funciona</p>
           <h3 className="mt-2 text-2xl font-bold sm:text-3xl">Do pagamento à sua tela em 3 passos</h3>
@@ -458,9 +466,10 @@ function Comparison() {
         </h2>
       </div>
 
-      <div className="glass glow-border overflow-hidden rounded-3xl">
-        {/* Header */}
-        <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-glass-border bg-secondary/40">
+      <div className="glass glow-border rounded-3xl p-3 sm:p-5">
+        <div className="overflow-hidden rounded-2xl border border-glass-border">
+          {/* Header */}
+          <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-glass-border bg-secondary/40">
           <div className="p-4 sm:p-5" />
           <div className="flex items-center gap-2 p-4 sm:p-5">
             <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-destructive/15">
@@ -503,6 +512,7 @@ function Comparison() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );
