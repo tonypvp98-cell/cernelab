@@ -466,9 +466,10 @@ function Comparison() {
         </h2>
       </div>
 
-      <div className="glass glow-border overflow-hidden rounded-3xl">
-        {/* Header */}
-        <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-glass-border bg-secondary/40">
+      <div className="glass glow-border rounded-3xl p-3 sm:p-5">
+        <div className="overflow-hidden rounded-2xl border border-glass-border">
+          {/* Header */}
+          <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-glass-border bg-secondary/40">
           <div className="p-4 sm:p-5" />
           <div className="flex items-center gap-2 p-4 sm:p-5">
             <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-destructive/15">
