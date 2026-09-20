@@ -259,7 +259,7 @@ function Catalog() {
             key={p.name}
             className="glass glow-border group flex flex-col overflow-hidden rounded-3xl"
           >
-            <div className="relative border-b border-glass-border bg-secondary/40 px-3 pt-3 pb-4 sm:px-5 sm:pt-5 sm:pb-5">
+            <div className="relative border-b border-glass-border bg-secondary/40 px-2 pt-2 pb-4 sm:px-4 sm:pt-4 sm:pb-5">
               <ProductMedia product={p} />
               <span className="absolute left-4 top-4 rounded-full border border-neon/40 bg-background/70 px-3 py-1 text-xs font-semibold text-neon backdrop-blur-md">
                 {p.category}
