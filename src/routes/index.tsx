@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Check,
+  X,
   Download,
   Infinity as InfinityIcon,
   ShieldCheck,
@@ -153,6 +154,8 @@ function Index() {
         <Hero />
         <Catalog />
         <Benefits />
+        <Guarantee />
+        <Comparison />
         <Faq />
       </main>
 
