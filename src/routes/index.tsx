@@ -402,6 +402,112 @@ function Benefits() {
   );
 }
 
+const comparisonRows = [
+  {
+    label: "Custo",
+    common: "Mensalidade Recorrente",
+    cerne: "Pagamento Único",
+  },
+  {
+    label: "Peso no Aparelho",
+    common: "Espaço na Memória",
+    cerne: "Leveza Instantânea",
+  },
+  {
+    label: "Experiência",
+    common: "Anúncios / Bugs",
+    cerne: "Experiência Clean",
+  },
+];
+
+function Guarantee() {
+  return (
+    <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
+      <div className="glass glow-border relative overflow-hidden rounded-3xl p-8 sm:p-10">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-neon/10 blur-[90px]"
+        />
+        <div className="relative flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+          <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl border border-neon/30 bg-neon/10 text-neon shadow-neon">
+            <ShieldCheck className="h-8 w-8" />
+          </span>
+          <div className="min-w-0">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Garantia Incondicional de 7 Dias
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Experimente sem compromisso. Se dentro de 7 dias você entender que o aplicativo não é
+              para você, solicitamos o reembolso integral direto pela Hotmart/Whop.{" "}
+              <span className="font-semibold text-neon">Risco zero para você.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Comparison() {
+  return (
+    <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
+      <div className="mb-10 text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Comparativo</p>
+        <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+          Por que escolher a Cerne Lab
+        </h2>
+      </div>
+
+      <div className="glass glow-border overflow-hidden rounded-3xl">
+        {/* Header */}
+        <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-glass-border bg-secondary/40">
+          <div className="p-4 sm:p-5" />
+          <div className="flex items-center gap-2 p-4 sm:p-5">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-destructive/15">
+              <X className="h-4 w-4 text-destructive" strokeWidth={3} />
+            </span>
+            <span className="text-xs font-semibold leading-tight sm:text-sm">
+              Apps Comuns de Assinatura
+            </span>
+          </div>
+          <div className="flex items-center gap-2 border-l border-glass-border bg-neon/5 p-4 sm:p-5">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-neon/15">
+              <Check className="h-4 w-4 text-neon" strokeWidth={3} />
+            </span>
+            <span className="text-xs font-semibold leading-tight text-neon sm:text-sm">
+              PWAs Cerne Lab
+            </span>
+          </div>
+        </div>
+
+        {/* Rows */}
+        {comparisonRows.map((row, i) => (
+          <div
+            key={row.label}
+            className={`grid grid-cols-[1fr_1fr_1fr] ${
+              i < comparisonRows.length - 1 ? "border-b border-glass-border" : ""
+            }`}
+          >
+            <div className="flex items-center p-4 text-xs font-medium uppercase tracking-wide text-muted-foreground sm:p-5 sm:text-sm">
+              {row.label}
+            </div>
+            <div className="flex items-center gap-2.5 p-4 sm:p-5">
+              <X className="h-4 w-4 shrink-0 text-destructive" strokeWidth={3} />
+              <span className="text-xs leading-snug text-muted-foreground sm:text-sm">
+                {row.common}
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5 border-l border-glass-border bg-neon/5 p-4 sm:p-5">
+              <Check className="h-4 w-4 shrink-0 text-neon" strokeWidth={3} />
+              <span className="text-xs font-semibold leading-snug sm:text-sm">{row.cerne}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Faq() {
   return (
     <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
