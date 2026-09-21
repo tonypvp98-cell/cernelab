@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   Check,
   X,
@@ -11,6 +12,7 @@ import {
   Share2,
   Smartphone,
   Mail,
+  Menu,
 } from "lucide-react";
 import {
   Accordion,
@@ -18,6 +20,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import ironformCover from "@/assets/ironform-cover.jpg";
 import financasCover from "@/assets/financas-cover.jpg";
 import cerneLogo from "@/assets/cerne-logo.png";
@@ -123,6 +126,14 @@ const faqs = [
 
 const highlights = ["Acesso Imediato", "Sem Mensalidades", "Funciona em Qualquer Dispositivo"];
 
+const navigation = [
+  { label: "Aplicativos", href: "#aplicativos" },
+  { label: "Vantagens PWA", href: "#vantagens-pwa" },
+  { label: "Como Funciona", href: "#como-funciona" },
+  { label: "Garantia", href: "#garantia" },
+  { label: "FAQ", href: "#faq" },
+];
+
 const pwaSteps = [
   {
     icon: Link2,
@@ -132,7 +143,7 @@ const pwaSteps = [
   {
     icon: Share2,
     title: "Adicione à Tela Inicial",
-    text: 'No Safari ou Chrome, toque em “Compartilhar” e selecione “Adicionar à Tela Inicial”.',
+    text: "",
   },
   {
     icon: Smartphone,
@@ -143,7 +154,7 @@ const pwaSteps = [
 
 function Index() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div id="top" className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       {/* Ambient glow + grid */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[720px] bg-tech-grid" />
       <div className="pointer-events-none absolute left-1/2 top-[-200px] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-neon/15 blur-[140px]" />
@@ -153,8 +164,7 @@ function Index() {
       <main className="relative">
         <Hero />
         <Catalog />
-        <Benefits />
-        <Comparison />
+        <PwaAdvantages />
         <HowItWorks />
         <Guarantee />
         <Faq />
@@ -166,10 +176,12 @@ function Index() {
 }
 
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 border-b border-glass-border bg-background/70 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#" className="flex min-w-0 items-center gap-2.5">
+      <div className="mx-auto grid h-16 max-w-6xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-5 sm:px-8 md:grid-cols-[auto_minmax(0,1fr)_auto] md:gap-6">
+        <a href="#top" className="flex min-w-0 items-center gap-2.5" onClick={() => setIsMenuOpen(false)}>
           <img
             src={cerneLogo}
             alt="Logotipo da Cerne Lab"
@@ -177,21 +189,46 @@ function Header() {
             width={209}
             height={256}
           />
-          <span className="truncate text-base font-bold tracking-tight">
+          <span className="truncate text-base font-bold">
             Cerne<span className="text-neon"> Lab</span>
           </span>
         </a>
-        <a
-          href={INSTAGRAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Falar com a Cerne Lab pelo Instagram"
-          className="glass glow-border inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium"
+        <nav aria-label="Navegação principal" className="hidden min-w-0 items-center justify-center gap-1 md:flex">
+          {navigation.map((item) => (
+            <a key={item.href} href={item.href} className="rounded-md px-2.5 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground lg:px-3 lg:text-sm">
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <Button asChild variant="outline" size="sm" className="glass shrink-0 rounded-full px-3">
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Falar com a Cerne Lab pelo Instagram">
+            <Instagram className="text-neon" />
+            <span className="hidden lg:inline">Suporte via Instagram</span>
+          </a>
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          className="glass shrink-0 rounded-full md:hidden"
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="menu-mobile"
+          onClick={() => setIsMenuOpen((open) => !open)}
         >
-          <Instagram className="h-4 w-4 text-neon" />
-          <span className="hidden sm:inline">Suporte via Instagram</span>
-        </a>
+          {isMenuOpen ? <X /> : <Menu />}
+        </Button>
       </div>
+      {isMenuOpen && (
+        <nav id="menu-mobile" aria-label="Navegação móvel" className="border-t border-glass-border bg-background px-5 py-3 md:hidden">
+          <div className="mx-auto grid max-w-6xl gap-1">
+            {navigation.map((item) => (
+              <a key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)} className="rounded-md px-3 py-2.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
@@ -203,7 +240,7 @@ function Hero() {
         <span className="h-1.5 w-1.5 rounded-full bg-neon shadow-neon" />
         Ecossistema de apps PWA
       </span>
-      <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
+      <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-extrabold leading-[1.05] sm:text-6xl">
         Soluções Digitais Essenciais para{" "}
         <span className="text-neon text-glow">Elevar sua Performance</span>
       </h1>
@@ -223,7 +260,7 @@ function Hero() {
         ))}
       </ul>
       <a
-        href="#catalogo"
+        href="#aplicativos"
         className="btn-neon mt-10 inline-flex h-12 items-center gap-2 rounded-full px-7 text-sm font-semibold"
       >
         Ver aplicativos
@@ -246,11 +283,11 @@ function Hero() {
 
 function Catalog() {
   return (
-    <section id="catalogo" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8">
+    <section id="aplicativos" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8">
       <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Catálogo</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Nossos aplicativos</h2>
+          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Nossos aplicativos</h2>
         </div>
         <p className="max-w-sm text-sm text-muted-foreground">
           Pagamento único, acesso vitalício e liberação automática.
@@ -263,7 +300,7 @@ function Catalog() {
             key={p.name}
             className="glass glow-border group flex flex-col overflow-hidden rounded-3xl"
           >
-            <div className="relative border-b border-glass-border bg-secondary/40 p-3 sm:p-4">
+            <div className="relative border-b border-glass-border bg-secondary/40 p-1.5 sm:p-2">
               <ProductMedia product={p} />
               <span className="absolute left-4 top-4 rounded-full border border-neon/40 bg-background/70 px-3 py-1 text-xs font-semibold text-neon backdrop-blur-md">
                 {p.category}
@@ -271,7 +308,7 @@ function Catalog() {
             </div>
 
             <div className="flex flex-1 flex-col p-6">
-              <h3 className="text-2xl font-bold tracking-tight">
+              <h3 className="text-2xl font-bold">
                 {p.name}{" "}
                 <span className="text-base font-medium text-muted-foreground">({p.tagline})</span>
               </h3>
@@ -310,18 +347,15 @@ function ProductMedia({ product }: { product: Product }) {
   const mediaSource = product.demoGif ?? product.cover;
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden rounded-xl">
       <div aria-hidden="true" className="absolute inset-0 bg-tech-grid" />
       <div
         className={
           product.frame === "desktop"
-            ? "relative z-10 aspect-[16/10] w-full overflow-hidden rounded-xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
-            : "relative z-10 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-glass-border bg-background p-1.5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.025]"
+            ? "relative z-10 aspect-[16/10] w-full overflow-hidden rounded-lg border border-glass-border bg-background shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
+            : "relative z-10 aspect-[16/10] w-full overflow-hidden rounded-lg border border-glass-border bg-background shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
         }
       >
-        {product.frame === "desktop" && (
-          <span className="absolute left-1/2 top-1 z-20 h-1 w-10 -translate-x-1/2 rounded-full bg-muted" />
-        )}
         <img
           src={mediaSource}
           alt={product.alt}
@@ -331,7 +365,7 @@ function ProductMedia({ product }: { product: Product }) {
           onError={(event) => {
             if (event.currentTarget.src !== product.cover) event.currentTarget.src = product.cover;
           }}
-          className="h-full w-full rounded-lg object-contain"
+          className="block h-full w-full object-contain"
         />
         {product.demoVideo && (
           <video
@@ -342,27 +376,27 @@ function ProductMedia({ product }: { product: Product }) {
             poster={product.cover}
             aria-label={`Demonstração do ${product.name}`}
             onLoadedData={(event) => event.currentTarget.classList.remove("opacity-0")}
-            className="absolute inset-1.5 z-10 h-[calc(100%-0.75rem)] w-[calc(100%-0.75rem)] rounded-lg object-contain opacity-0 transition-opacity duration-500"
+            className="absolute inset-0 z-10 h-full w-full object-contain opacity-0 transition-opacity duration-500"
           >
             <source src={product.demoVideo} />
           </video>
-        )}
-        {product.frame === "desktop" && (
-          <span className="absolute -bottom-2 left-1/2 h-2 w-[108%] -translate-x-1/2 rounded-b-xl border-x border-b border-glass-border bg-muted" />
         )}
       </div>
     </div>
   );
 }
 
-function Benefits() {
+function PwaAdvantages() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+    <section id="vantagens-pwa" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8">
       <div className="mb-10 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Por que PWA</p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
           O formato certo para o seu dia a dia
         </h2>
+        <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Tecnologia web de alta performance: O PWA roda direto do navegador, ocupa 0MB da memória do seu celular e elimina as assinaturas mensais abusivas das lojas tradicionais.
+        </p>
       </div>
       <div className="grid gap-5 sm:grid-cols-3">
         {benefits.map(({ icon: Icon, title, text }) => (
@@ -375,14 +409,14 @@ function Benefits() {
           </div>
         ))}
       </div>
-
+      <Comparison />
     </section>
   );
 }
 
 function HowItWorks() {
   return (
-    <section className="mx-auto max-w-6xl px-5 pb-4 sm:px-8">
+    <section id="como-funciona" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-4 sm:px-8">
       <div className="border-y border-glass-border py-10 sm:py-12">
         <div className="mb-8 max-w-xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Como funciona</p>
@@ -400,7 +434,14 @@ function HowItWorks() {
               <div className="min-w-0 sm:mt-5">
                 <p className="text-xs font-bold uppercase text-neon">Passo {index + 1}</p>
                 <h4 className="mt-1 text-lg font-semibold">{title}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                 {index === 1 ? (
+                   <div className="mt-2 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                     <p><span className="font-semibold text-foreground">No Celular (Safari/Chrome):</span> Toque no ícone de “Compartilhar” e escolha “Adicionar à Tela Inicial”.</p>
+                     <p><span className="font-semibold text-foreground">No Computador (Chrome/Edge):</span> Clique no ícone de “Instalar App” na barra de endereço do navegador.</p>
+                   </div>
+                 ) : (
+                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                 )}
               </div>
             </li>
           ))}
@@ -413,24 +454,24 @@ function HowItWorks() {
 const comparisonRows = [
   {
     label: "Custo",
-    common: "Mensalidade Recorrente",
-    cerne: "Pagamento Único",
+    common: "Mensalidade Recorrente (R$ 30–50/mês)",
+    cerne: "Pagamento Único (R$ 25,00 Vitalício)",
   },
   {
     label: "Peso no Aparelho",
-    common: "Espaço na Memória",
-    cerne: "Leveza Instantânea",
+    common: "150MB a 300MB ocupados",
+    cerne: "Leveza Instantânea (0MB de armazenamento)",
   },
   {
-    label: "Experiência",
-    common: "Anúncios / Bugs",
-    cerne: "Experiência Clean",
+    label: "Burocracia",
+    common: "Downloads e atualizações manuais na App Store",
+    cerne: "Instalação em 1 clique sem loja",
   },
 ];
 
 function Guarantee() {
   return (
-    <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
+    <section id="garantia" className="mx-auto max-w-4xl scroll-mt-24 px-5 py-16 sm:px-8">
       <div className="glass glow-border relative overflow-hidden rounded-3xl p-8 sm:p-10">
         <div
           aria-hidden="true"
@@ -441,13 +482,11 @@ function Guarantee() {
             <ShieldCheck className="h-8 w-8" />
           </span>
           <div className="min-w-0">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Garantia Incondicional de 7 Dias
+            <h2 className="text-2xl font-bold sm:text-3xl">
+              Garantia Incondicional de 7 Dias — Risco Zero
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Experimente sem compromisso. Se dentro de 7 dias você entender que o aplicativo não é
-              para você, solicitamos o reembolso integral direto pela Hotmart/Whop.{" "}
-              <span className="font-semibold text-neon">Risco zero para você.</span>
+              Experimente os aplicativos com tranquilidade. Se dentro de 7 dias você entender que a ferramenta não atendeu às suas expectativas, solicitamos o reembolso integral direto pela Hotmart/Whop. Sem perguntas, sem burocracia e sem letras miúdas.
             </p>
           </div>
         </div>
@@ -458,32 +497,32 @@ function Guarantee() {
 
 function Comparison() {
   return (
-    <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
-      <div className="mb-10 text-center">
+    <div className="mx-auto mt-16 max-w-5xl">
+      <div className="mb-8 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Comparativo</p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
           Por que escolher a Cerne Lab
         </h2>
       </div>
 
-      <div className="glass glow-border rounded-3xl p-3 sm:p-5">
+      <div className="glass glow-border rounded-3xl p-3 sm:p-6">
         <div className="overflow-hidden rounded-2xl border border-glass-border">
           {/* Header */}
-          <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-glass-border bg-secondary/40">
-          <div className="p-4 sm:p-5" />
+          <div className="grid grid-cols-2 border-b border-glass-border bg-secondary/40 sm:grid-cols-[0.75fr_1.125fr_1.125fr]">
+          <div className="hidden p-4 sm:block sm:p-5" />
           <div className="flex items-center gap-2 p-4 sm:p-5">
             <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-destructive/15">
               <X className="h-4 w-4 text-destructive" strokeWidth={3} />
             </span>
             <span className="text-xs font-semibold leading-tight sm:text-sm">
-              Apps Comuns de Assinatura
+              Apps Tradicionais de Assinatura
             </span>
           </div>
-          <div className="flex items-center gap-2 border-l border-glass-border bg-neon/5 p-4 sm:p-5">
-            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-neon/15">
-              <Check className="h-4 w-4 text-neon" strokeWidth={3} />
+          <div className="flex items-center gap-2 border-l border-glass-border bg-success/5 p-4 sm:p-5">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-success/15">
+              <Check className="h-4 w-4 text-success" strokeWidth={3} />
             </span>
-            <span className="text-xs font-semibold leading-tight text-neon sm:text-sm">
+            <span className="text-xs font-semibold leading-tight text-success sm:text-sm">
               PWAs Cerne Lab
             </span>
           </div>
@@ -493,11 +532,11 @@ function Comparison() {
         {comparisonRows.map((row, i) => (
           <div
             key={row.label}
-            className={`grid grid-cols-[1fr_1fr_1fr] ${
+            className={`grid grid-cols-2 sm:grid-cols-[0.75fr_1.125fr_1.125fr] ${
               i < comparisonRows.length - 1 ? "border-b border-glass-border" : ""
             }`}
           >
-            <div className="flex items-center p-4 text-xs font-medium uppercase tracking-wide text-muted-foreground sm:p-5 sm:text-sm">
+            <div className="col-span-2 flex items-center border-b border-glass-border bg-secondary/20 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted-foreground sm:col-span-1 sm:border-b-0 sm:bg-transparent sm:p-5 sm:text-sm">
               {row.label}
             </div>
             <div className="flex items-center gap-2.5 p-4 sm:p-5">
@@ -506,24 +545,24 @@ function Comparison() {
                 {row.common}
               </span>
             </div>
-            <div className="flex items-center gap-2.5 border-l border-glass-border bg-neon/5 p-4 sm:p-5">
-              <Check className="h-4 w-4 shrink-0 text-neon" strokeWidth={3} />
+            <div className="flex items-center gap-2.5 border-l border-glass-border bg-success/5 p-4 sm:p-5">
+              <Check className="h-4 w-4 shrink-0 text-success" strokeWidth={3} />
               <span className="text-xs font-semibold leading-snug sm:text-sm">{row.cerne}</span>
             </div>
           </div>
         ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
 function Faq() {
   return (
-    <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+    <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-5 py-16 sm:px-8">
       <div className="mb-8 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">FAQ</p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Dúvidas Gerais</h2>
+        <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Dúvidas Gerais</h2>
       </div>
       <Accordion type="single" collapsible className="glass rounded-3xl px-6">
         {faqs.map((f, i) => (
