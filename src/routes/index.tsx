@@ -508,8 +508,8 @@ function Comparison() {
       <div className="glass glow-border rounded-3xl p-3 sm:p-6">
         <div className="overflow-hidden rounded-2xl border border-glass-border">
           {/* Header */}
-          <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-glass-border bg-secondary/40">
-          <div className="p-4 sm:p-5" />
+          <div className="grid grid-cols-2 border-b border-glass-border bg-secondary/40 sm:grid-cols-[0.75fr_1.125fr_1.125fr]">
+          <div className="hidden p-4 sm:block sm:p-5" />
           <div className="flex items-center gap-2 p-4 sm:p-5">
             <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-destructive/15">
               <X className="h-4 w-4 text-destructive" strokeWidth={3} />
@@ -518,11 +518,11 @@ function Comparison() {
               Apps Tradicionais de Assinatura
             </span>
           </div>
-          <div className="flex items-center gap-2 border-l border-glass-border bg-neon/5 p-4 sm:p-5">
-            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-neon/15">
-              <Check className="h-4 w-4 text-neon" strokeWidth={3} />
+          <div className="flex items-center gap-2 border-l border-glass-border bg-success/5 p-4 sm:p-5">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-success/15">
+              <Check className="h-4 w-4 text-success" strokeWidth={3} />
             </span>
-            <span className="text-xs font-semibold leading-tight text-neon sm:text-sm">
+            <span className="text-xs font-semibold leading-tight text-success sm:text-sm">
               PWAs Cerne Lab
             </span>
           </div>
@@ -532,11 +532,11 @@ function Comparison() {
         {comparisonRows.map((row, i) => (
           <div
             key={row.label}
-            className={`grid grid-cols-[1fr_1fr_1fr] ${
+            className={`grid grid-cols-2 sm:grid-cols-[0.75fr_1.125fr_1.125fr] ${
               i < comparisonRows.length - 1 ? "border-b border-glass-border" : ""
             }`}
           >
-            <div className="flex items-center p-4 text-xs font-medium uppercase tracking-wide text-muted-foreground sm:p-5 sm:text-sm">
+            <div className="col-span-2 flex items-center border-b border-glass-border bg-secondary/20 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted-foreground sm:col-span-1 sm:border-b-0 sm:bg-transparent sm:p-5 sm:text-sm">
               {row.label}
             </div>
             <div className="flex items-center gap-2.5 p-4 sm:p-5">
@@ -545,8 +545,8 @@ function Comparison() {
                 {row.common}
               </span>
             </div>
-            <div className="flex items-center gap-2.5 border-l border-glass-border bg-neon/5 p-4 sm:p-5">
-              <Check className="h-4 w-4 shrink-0 text-neon" strokeWidth={3} />
+            <div className="flex items-center gap-2.5 border-l border-glass-border bg-success/5 p-4 sm:p-5">
+              <Check className="h-4 w-4 shrink-0 text-success" strokeWidth={3} />
               <span className="text-xs font-semibold leading-snug sm:text-sm">{row.cerne}</span>
             </div>
           </div>
