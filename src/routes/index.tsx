@@ -205,12 +205,22 @@ function Header() {
             <Instagram className="text-neon" />
           </a>
         </Button>
-        <Button asChild size="sm" className="btn-neon shrink-0 rounded-md px-4 font-bold">
-          <a href="#aplicativos">Garantir Acesso Vitalício - R$ 25,00</a>
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className="glass shrink-0 rounded-md border-neon/40 px-4 font-semibold text-neon/90 transition-colors hover:border-neon hover:bg-neon/10 hover:text-neon"
+        >
+          <a href="#aplicativos">Garantir Acesso</a>
         </Button>
         </div>
-        <Button asChild size="sm" className="btn-neon shrink-0 rounded-md px-3 text-xs lg:hidden">
-          <a href="#aplicativos">Acesso R$ 25</a>
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className="glass shrink-0 rounded-md border-neon/40 px-3 text-xs font-semibold text-neon/90 transition-colors hover:border-neon hover:bg-neon/10 hover:text-neon lg:hidden"
+        >
+          <a href="#aplicativos">Garantir Acesso</a>
         </Button>
         <Button
           variant="outline"
