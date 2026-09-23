@@ -9,5 +9,5 @@
 - [x] Reestruturar navegação, copy e ordem de conversão
 - [x] Ajustar mockups e comparativo para desktop e celular
 - [x] Validar âncoras, menu móvel e apresentação final
-- [ ] Aplicar refinamento neo-brutalista ao cabeçalho, mockups, comparativo e instalação
-- [ ] Validar navegação, legibilidade e responsividade final
+- [x] Aplicar refinamento neo-brutalista ao cabeçalho, mockups, comparativo e instalação
+- [x] Validar navegação, legibilidade e responsividade final
