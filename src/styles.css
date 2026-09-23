@@ -145,19 +145,19 @@
 
 /* Frosted glass card */
 @utility glass {
-  background: linear-gradient(180deg, oklch(1 0 0 / 6%), oklch(1 0 0 / 2%));
+  background: linear-gradient(180deg, oklch(1 0 0 / 5%), oklch(1 0 0 / 1.5%));
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(130%);
   box-shadow: var(--shadow-glass);
 }
 
 /* Subtle glowing border on hover */
 @utility glow-border {
-  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+  transition: border-color 240ms ease, box-shadow 240ms ease, transform 240ms ease;
   &:hover {
-    border-color: color-mix(in oklab, var(--neon) 45%, transparent);
-    box-shadow: 0 0 0 1px color-mix(in oklab, var(--neon) 25%, transparent), 0 0 40px -10px var(--neon-glow), var(--shadow-glass);
-    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--neon) 38%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--neon) 18%, transparent), 0 0 28px -14px var(--neon-glow), var(--shadow-glass);
+    transform: translateY(-1px);
   }
 }
 
@@ -174,6 +174,21 @@
   }
   &:active {
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 
