@@ -11,3 +11,5 @@
 - [x] Validar âncoras, menu móvel e apresentação final
 - [x] Aplicar refinamento neo-brutalista ao cabeçalho, mockups, comparativo e instalação
 - [x] Validar navegação, legibilidade e responsividade final
+- [x] Substituir o banner quebrado por uma composição nativa Dark Tech
+- [x] Adicionar modais funcionais de Termos de Uso e Política de Privacidade

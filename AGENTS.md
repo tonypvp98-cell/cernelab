@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- O banner institucional deve ser renderizado com HTML/CSS e ativos locais, evitando dependência de uma imagem remota; isso mantém a abertura confiável.
