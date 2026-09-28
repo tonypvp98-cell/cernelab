@@ -21,10 +21,17 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import ironformCover from "@/assets/ironform-cover.jpg";
 import financasCover from "@/assets/financas-cover.jpg";
 import cerneLogo from "@/assets/cerne-logo.png";
-import cerneBanner from "@/assets/cerne-lab-banner.png.asset.json";
 
 const TITLE = "Cerne Lab — Hub de Aplicativos PWA";
 const DESCRIPTION =
@@ -283,15 +290,27 @@ function Hero() {
         <ArrowUpRight className="h-4 w-4" />
       </a>
 
-      <div className="glass glow-border mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl">
-        <img
-          src={cerneBanner.url}
-          alt="Banner da Cerne Lab — Soluções Digitais Essenciais"
-          width={1999}
-          height={998}
-          loading="lazy"
-          className="h-auto w-full"
-        />
+      <div
+        role="img"
+        aria-label="Banner da Cerne Lab — Soluções Digitais Essenciais"
+        className="glass glow-border relative mx-auto mt-16 grid min-h-64 max-w-5xl overflow-hidden rounded-2xl border-neon/20 bg-[linear-gradient(135deg,var(--background)_0%,var(--secondary)_48%,color-mix(in_oklab,var(--neon)_14%,var(--background))_100%)] px-6 py-10 text-left sm:min-h-80 sm:px-12 sm:py-12"
+      >
+        <div aria-hidden="true" className="absolute inset-0 bg-tech-grid opacity-60" />
+        <div aria-hidden="true" className="absolute -right-20 top-1/2 h-56 w-56 -translate-y-1/2 rotate-45 border border-neon/20 sm:right-6 sm:h-64 sm:w-64" />
+        <div aria-hidden="true" className="absolute -right-10 top-1/2 h-36 w-36 -translate-y-1/2 rotate-45 border border-neon/50 sm:right-20 sm:h-44 sm:w-44" />
+        <div className="relative z-10 my-auto max-w-xl">
+          <div className="mb-6 flex items-center gap-3">
+            <img src={cerneLogo} alt="" className="h-12 w-auto" width={209} height={256} />
+            <p className="font-display text-lg font-bold">Cerne <span className="text-neon">Lab</span></p>
+          </div>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-neon">Ecossistema PWA</p>
+          <h2 className="mt-3 max-w-lg text-3xl font-bold leading-tight sm:text-5xl">
+            Soluções Digitais <span className="text-neon">Essenciais</span>
+          </h2>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Tecnologia prática para organizar suas finanças e elevar sua performance.
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -629,11 +648,97 @@ function Footer() {
             Suporte via Instagram
           </a>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <a href="#" className="transition-colors hover:text-neon">Termos de Uso</a>
-            <a href="#" className="transition-colors hover:text-neon">Política de Privacidade</a>
+            <LegalDialog type="terms" />
+            <LegalDialog type="privacy" />
           </div>
         </nav>
       </div>
     </footer>
+  );
+}
+
+function LegalDialog({ type }: { type: "terms" | "privacy" }) {
+  const isTerms = type === "terms";
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          variant="link"
+          className="h-auto p-0 text-sm font-normal text-muted-foreground transition-colors hover:text-neon"
+        >
+          {isTerms ? "Termos de Uso" : "Política de Privacidade"}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="glass max-h-[85vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto rounded-xl border-neon/20 p-6 shadow-neon sm:p-8">
+        <DialogHeader className="pr-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-neon">Cerne Lab</p>
+          <DialogTitle className="text-2xl font-bold sm:text-3xl">
+            {isTerms ? "Termos de Uso" : "Política de Privacidade"}
+          </DialogTitle>
+          <DialogDescription className="leading-relaxed">
+            {isTerms
+              ? "Condições aplicáveis às licenças dos aplicativos PWA da Cerne Lab."
+              : "Como os aplicativos da Cerne Lab tratam e protegem suas informações."}
+          </DialogDescription>
+        </DialogHeader>
+
+        {isTerms ? <TermsContent /> : <PrivacyContent />}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function TermsContent() {
+  return (
+    <div className="grid gap-5 text-sm leading-relaxed text-muted-foreground">
+      <section>
+        <h3 className="font-semibold text-foreground">1. Licença de uso individual</h3>
+        <p className="mt-1">A compra concede ao titular uma licença pessoal, individual, intransferível e não exclusiva para utilizar o aplicativo PWA adquirido.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">2. Acesso vitalício</h3>
+        <p className="mt-1">O pagamento é único e não possui mensalidades. O acesso vitalício refere-se ao direito de uso da versão adquirida enquanto o serviço permanecer disponível e observadas estas condições.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">3. Uso permitido</h3>
+        <p className="mt-1">A licença permite o uso do PWA nos dispositivos pessoais do titular. É proibido revender, sublicenciar, compartilhar credenciais, copiar, modificar ou distribuir o aplicativo e seus conteúdos.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">4. Ativação e suporte</h3>
+        <p className="mt-1">O acesso é liberado após a confirmação do pagamento pela plataforma de venda. Dúvidas de acesso e suporte podem ser encaminhadas pelos canais oficiais da Cerne Lab.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">5. Garantia</h3>
+        <p className="mt-1">O comprador pode solicitar reembolso integral no prazo de 7 dias, conforme as condições informadas na oferta e o procedimento da plataforma de pagamento.</p>
+      </section>
+    </div>
+  );
+}
+
+function PrivacyContent() {
+  return (
+    <div className="grid gap-5 text-sm leading-relaxed text-muted-foreground">
+      <section>
+        <h3 className="font-semibold text-foreground">1. Armazenamento local</h3>
+        <p className="mt-1">Os dados inseridos nos aplicativos são armazenados localmente no dispositivo do usuário. A Cerne Lab não recebe, visualiza ou mantém uma cópia desses dados.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">2. Compartilhamento de dados</h3>
+        <p className="mt-1">As informações armazenadas nos aplicativos não são vendidas, cedidas ou compartilhadas pela Cerne Lab com terceiros.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">3. Compra e licença</h3>
+        <p className="mt-1">A plataforma de pagamento processa os dados necessários à compra e à liberação da licença conforme sua própria política de privacidade. A Cerne Lab utiliza apenas as informações necessárias para validar o acesso e prestar suporte.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">4. Controle do usuário</h3>
+        <p className="mt-1">Como os dados do aplicativo permanecem no aparelho, limpar os dados do navegador ou remover o aplicativo pode apagá-los. O usuário é responsável por manter cópias de segurança quando o aplicativo oferecer essa opção.</p>
+      </section>
+      <section>
+        <h3 className="font-semibold text-foreground">5. Contato</h3>
+        <p className="mt-1">Solicitações relacionadas à privacidade podem ser enviadas para contato@cernelab.com.</p>
+      </section>
+    </div>
   );
 }
