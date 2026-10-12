@@ -126,12 +126,12 @@ const faqs = [
     a: "Sim. Sua licença é pessoal e pode ser ativada nos seus dispositivos — celular, tablet e computador. Basta abrir o link no navegador e adicionar à tela inicial.",
   },
   {
-    q: "Onde insiro minha chave de licença?",
+    q: "Onde insiro minha chave de acesso?",
     a: "Ao abrir o aplicativo pela primeira vez, será exibida uma tela de ativação. Cole sua chave de licença nesse campo e o acesso é liberado na hora.",
   },
 ];
 
-const highlights = ["Acesso Imediato", "Sem Mensalidades", "Funciona em Qualquer Dispositivo"];
+const highlights = ["Acesso via Link", "Sem Download de Loja", "Funciona em Qualquer Dispositivo"];
 
 const navigation = [
   { label: "Ecossistema", href: "#ecossistema" },
@@ -261,15 +261,14 @@ function Hero() {
     <section id="ecossistema" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-16 pt-20 text-center sm:px-8 sm:pb-24 sm:pt-28">
       <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
         <span className="h-1.5 w-1.5 rounded-full bg-neon shadow-neon" />
-        Ecossistema de apps PWA
+        Ecossistema PWA • Acesso Imediato
       </span>
       <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-extrabold leading-[1.05] sm:text-6xl">
         Soluções Digitais Essenciais para{" "}
-        <span className="text-neon text-glow">Elevar sua Performance</span>
+        <span className="text-neon text-glow">o seu Negócio</span>
       </h1>
       <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-        Aplicativos web (PWA) rápidos, sem necessidade de instalação por loja e com acesso
-        vitalício.
+        Tecnologia prática para organizar suas finanças, acelerar suas vendas e elevar sua performance.
       </p>
       <ul className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
         {highlights.map((h) => (
