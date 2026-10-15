@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { catalogCategories, filterProducts, publishedBundles, publishedTestimonials, publishedReleaseNotes, bundles, testimonials, releaseNotes, demoBalance } from "./storefront-content";
 
 describe("Storefront publication and filters", () => {
