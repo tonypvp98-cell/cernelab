@@ -85,8 +85,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.17 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.70 0.15 163);
-  --primary-foreground: oklch(0.14 0.025 163);
+  --primary: oklch(0.82 0.16 75); /* #F5A623 */
+  --primary-foreground: oklch(0.18 0.05 75);
   --secondary: oklch(0.22 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.22 0 0);
@@ -113,7 +113,7 @@
   --sidebar-ring: var(--primary);
 
   --neon: var(--primary);
-  --neon-glow: oklch(0.70 0.15 163 / 30%);
+  --neon-glow: oklch(0.82 0.16 75 / 45%);
   --gold: oklch(0.81 0.10 85);
   --overlay: oklch(0 0 0 / 80%);
   --glass: oklch(1 0 0 / 4%);
