@@ -1,7 +1,13 @@
 import { describe, expect, test } from "vitest";
-import { catalogCategories, filterProducts, publishedBundles, publishedTestimonials, publishedReleaseNotes, bundles, testimonials, releaseNotes, demoBalance } from "./storefront-content";
+import { catalogCategories, filterProducts, publishedBundles, publishedTestimonials, publishedReleaseNotes, bundles, testimonials, releaseNotes, demoBalance, parseDemoAmount } from "./storefront-content";
 
 describe("Storefront publication and filters", () => {
+  test("accepts Brazilian expense amounts and rejects malformed values", () => {
+    expect(parseDemoAmount("1.500,00")).toBe(1500);
+    expect(parseDemoAmount("150,00")).toBe(150);
+    expect(parseDemoAmount("150.25")).toBe(150.25);
+    expect(parseDemoAmount("1.2.3")).toBeNaN();
+  });
   test("offers exactly the four requested categories", () => {
     expect(catalogCategories).toEqual(["Todos", "Gestão & Vendas", "Finanças", "Produtividade"]);
   });

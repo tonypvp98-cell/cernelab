@@ -48,6 +48,13 @@ export function publishedReleaseNotes(items: readonly ReleaseNote[]): ReleaseNot
 }
 
 export type DemoTransaction = { id: number; label: string; amount: number; kind: "income" | "expense" };
+export function parseDemoAmount(input: string): number {
+  const value = input.trim();
+  const valid = /^\d+(?:\.\d{1,2})?$/.test(value) || /^\d+(?:,\d{1,2})?$/.test(value) || /^\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?$/.test(value);
+  if (!valid) return NaN;
+  const grouped = /^\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?$/.test(value);
+  return Number((grouped ? value.replaceAll(".", "") : value).replace(",", "."));
+}
 export function demoBalance(transactions: readonly DemoTransaction[]): number {
   return transactions.reduce((total, row) => total + (row.kind === "income" ? row.amount : -row.amount), 0);
 }
