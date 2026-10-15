@@ -3,7 +3,7 @@ import { ArrowUpRight, Check, Dumbbell, FlaskConical, Plus, RotateCcw, Wallet } 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { demoBalance, type DemoTransaction } from "@/lib/storefront-content";
+import { demoBalance, parseDemoAmount, type DemoTransaction } from "@/lib/storefront-content";
 
 type DemoProduct = { name: string; frame: "desktop" | "mobile"; link: string };
 const currency = (value: number) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(value);
@@ -62,9 +62,9 @@ function FinanceDemo() {
       </ul>
       <form className="mt-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_8rem_auto]" onSubmit={event => {
         event.preventDefault();
-        const value = Number(amount.replace(",", "."));
+        const value = parseDemoAmount(amount);
         if (!label.trim() || !Number.isFinite(value) || value <= 0) { setError("Informe uma descrição e um valor maior que zero."); return; }
-        setTransactions(rows => [...rows, { id: Math.max(...rows.map(row => row.id)) + 1, label: label.trim(), amount: value, kind: "expense" }]);
+        setTransactions(rows => [...rows, { id: Math.max(0, ...rows.map(row => row.id)) + 1, label: label.trim(), amount: value, kind: "expense" }]);
         setLabel(""); setAmount(""); setError("");
       }}>
         <label className="grid gap-1 text-xs text-muted-foreground">Descrição<Input value={label} onChange={e => setLabel(e.target.value)} maxLength={50} placeholder="Ex.: Material de escritório" /></label>

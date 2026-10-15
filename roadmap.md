@@ -13,6 +13,7 @@
 - [x] Validar navegação, legibilidade e responsividade final
 - [x] Substituir o banner quebrado por uma composição nativa Dark Tech
 - [x] Adicionar modais funcionais de Termos de Uso e Política de Privacidade
-- [ ] Implementar filtros por categoria e demos interativas dos dois aplicativos
-- [ ] Preparar combos, depoimentos e atualizações sem publicar conteúdo não confirmado
-- [ ] Atualizar detalhes visuais para esmeralda e dourado e validar navegação e demos
+- [x] Corrigir testes e concluir filtros e demonstrações interativas
+- [x] Integrar combos, depoimentos e atualizações sem publicar conteúdo não confirmado
+- [x] Validar links de compra, suporte, filtros e demonstrações no computador e celular
+- [x] Atualizar detalhes visuais para esmeralda e dourado e validar navegação e demos

@@ -10,3 +10,6 @@
 <!-- LOVABLE:END -->
 
 - O banner institucional deve ser renderizado com HTML/CSS e ativos locais, evitando dependência de uma imagem remota; isso mantém a abertura confiável.
+- Storefront publication predicates and category filtering live in a shared browser-safe content module so draft sections never bypass approval checks.
+- Interactive product demos use modal-local React state and never persist simulated data, keeping trials isolated from purchased applications.
+- Use Vitest for frontend unit tests so test imports resolve during project checks.

@@ -32,6 +32,9 @@ import {
 import ironformCover from "@/assets/ironform-cover.jpg";
 import financasCover from "@/assets/financas-cover.jpg";
 import cerneLogo from "@/assets/cerne-logo.png";
+import { ProductDemo } from "@/components/product-demo";
+import { StorefrontBundles, StorefrontTestimonials, StorefrontChangelog } from "@/components/storefront-sections";
+import { catalogCategories, filterProducts, type CatalogCategory } from "@/lib/storefront-content";
 
 const TITLE = "Cerne Lab — Hub de Aplicativos PWA";
 const DESCRIPTION =
@@ -58,6 +61,7 @@ type Product = {
   name: string;
   tagline: string;
   category: string;
+  filters: readonly CatalogCategory[];
   description: string;
   originalPrice: string;
   price: string;
@@ -74,6 +78,7 @@ const products: Product[] = [
     name: "Finanças & Metas",
     tagline: "Controle financeiro inteligente",
     category: "Gestão Financeira",
+    filters: ["Finanças"],
     description:
       "Organize gastos, defina metas e veja seu dinheiro trabalhar com painéis claros e alertas automáticos.",
     originalPrice: "R$ 31,25",
@@ -87,6 +92,7 @@ const products: Product[] = [
     name: "Ironform",
     tagline: "Gym & AI Coach",
     category: "Fitness & Treino",
+    filters: [],
     description:
       "Treinos personalizados por IA, acompanhamento de cargas e evolução em tempo real — seu personal no bolso.",
     originalPrice: "R$ 31,25",
@@ -160,19 +166,24 @@ const pwaSteps = [
 ];
 
 function Index() {
+  const [activeCategory, setActiveCategory] = useState<CatalogCategory>("Todos");
+  const showAllProducts = () => setActiveCategory("Todos");
   return (
     <div id="top" className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       {/* Technical grid */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[720px] bg-tech-grid" />
 
-      <Header />
+      <Header onNavigate={showAllProducts} />
 
       <main className="relative">
-        <Hero />
-        <Catalog />
+        <Hero onNavigate={showAllProducts} />
+        <Catalog activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+        <StorefrontBundles />
         <PwaAdvantages />
         <HowItWorks />
         <Guarantee />
+        <StorefrontTestimonials />
+        <StorefrontChangelog />
         <Faq />
       </main>
 
@@ -181,7 +192,7 @@ function Index() {
   );
 }
 
-function Header() {
+function Header({ onNavigate }: { onNavigate: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -201,7 +212,7 @@ function Header() {
         </a>
         <nav aria-label="Navegação principal" className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex">
           {navigation.map((item) => (
-            <a key={item.href} href={item.href} className="rounded-md px-2.5 py-2 text-xs font-bold uppercase text-muted-foreground transition-colors hover:bg-secondary hover:text-neon xl:px-3">
+            <a key={item.href} href={item.href} onClick={onNavigate} className="rounded-md px-2.5 py-2 text-xs font-bold uppercase text-muted-foreground transition-colors hover:bg-secondary hover:text-neon xl:px-3">
               {item.label}
             </a>
           ))}
@@ -216,18 +227,18 @@ function Header() {
           asChild
           variant="outline"
           size="sm"
-          className="glass shrink-0 rounded-md border-neon/40 px-4 font-semibold text-neon/90 transition-colors hover:border-neon hover:bg-neon/10 hover:text-neon"
+          className="glass shrink-0 rounded-md border-gold/40 px-4 font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
         >
-          <a href="#aplicativos">Garantir Acesso</a>
+          <a href="#aplicativos" onClick={onNavigate}>Garantir Acesso</a>
         </Button>
         </div>
         <Button
           asChild
           variant="outline"
           size="sm"
-          className="glass shrink-0 rounded-md border-neon/40 px-3 text-xs font-semibold text-neon/90 transition-colors hover:border-neon hover:bg-neon/10 hover:text-neon lg:hidden"
+          className="glass shrink-0 rounded-md border-gold/40 px-3 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold lg:hidden"
         >
-          <a href="#aplicativos">Garantir Acesso</a>
+          <a href="#aplicativos" onClick={onNavigate}>Garantir Acesso</a>
         </Button>
         <Button
           variant="outline"
@@ -245,7 +256,7 @@ function Header() {
         <nav id="menu-mobile" aria-label="Navegação móvel" className="border-t border-glass-border bg-background px-5 py-3 lg:hidden">
           <div className="mx-auto grid max-w-6xl gap-1">
             {navigation.map((item) => (
-              <a key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)} className="rounded-md px-3 py-2.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+              <a key={item.href} href={item.href} onClick={() => { onNavigate(); setIsMenuOpen(false); }} className="rounded-md px-3 py-2.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
                 {item.label}
               </a>
             ))}
@@ -256,7 +267,7 @@ function Header() {
   );
 }
 
-function Hero() {
+function Hero({ onNavigate }: { onNavigate: () => void }) {
   return (
     <section id="ecossistema" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-16 pt-20 text-center sm:px-8 sm:pb-24 sm:pt-28">
       <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
@@ -281,13 +292,15 @@ function Hero() {
           </li>
         ))}
       </ul>
+      <Button asChild className="btn-neon mt-10 h-12 rounded-full px-7 text-sm font-semibold">
       <a
         href="#aplicativos"
-        className="btn-neon mt-10 inline-flex h-12 items-center gap-2 rounded-full px-7 text-sm font-semibold"
+        onClick={onNavigate}
       >
         Ver aplicativos
         <ArrowUpRight className="h-4 w-4" />
       </a>
+      </Button>
 
       <div
         role="img"
@@ -315,7 +328,8 @@ function Hero() {
   );
 }
 
-function Catalog() {
+function Catalog({ activeCategory, onCategoryChange }: { activeCategory: CatalogCategory; onCategoryChange: (category: CatalogCategory) => void }) {
+  const visibleProducts = filterProducts(products, activeCategory);
   return (
     <section id="aplicativos" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8">
       <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -328,12 +342,20 @@ function Catalog() {
         </p>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        {products.map((p) => (
+      <div role="group" aria-label="Filtrar aplicativos por categoria" className="mb-8 flex flex-wrap gap-2">
+        {catalogCategories.map(category => (
+          <Button key={category} variant={activeCategory === category ? "default" : "outline"} aria-pressed={activeCategory === category} onClick={() => onCategoryChange(category)} className={`min-h-10 rounded-lg px-4 ${activeCategory === category ? "" : "border-glass-border bg-glass text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}>
+            {category}
+          </Button>
+        ))}
+      </div>
+      <p role="status" className="sr-only">{visibleProducts.length} aplicativos encontrados</p>
+      <div className="grid min-h-64 gap-6 sm:grid-cols-2">
+        {visibleProducts.map((p) => (
           <article
             key={p.name}
             id={p.name === "Finanças & Metas" ? "financas-metas" : "ironform"}
-            className="glass glow-border group flex scroll-mt-24 flex-col overflow-hidden rounded-xl"
+            className="glass glow-border group flex scroll-mt-24 flex-col overflow-hidden rounded-2xl"
           >
             <div className="relative border-b border-glass-border bg-secondary/20 p-0.5">
               <ProductMedia product={p} />
@@ -361,18 +383,28 @@ function Catalog() {
                 </span>
               </div>
 
+              <div className="mt-5 grid gap-3">
+              <Button asChild className="btn-neon h-12 w-full rounded-xl text-sm font-semibold">
               <a
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-neon mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl text-sm font-semibold"
               >
                 Garantir Acesso
                 <ArrowUpRight className="h-4 w-4" />
               </a>
+              </Button>
+              <ProductDemo product={p} />
+              </div>
             </div>
           </article>
         ))}
+        {visibleProducts.length === 0 && (
+          <div className="col-span-full flex flex-col items-center justify-center gap-4 border-y border-border py-12 text-center">
+            <p className="text-lg font-semibold">Nenhum aplicativo nesta categoria ainda.</p>
+            <Button variant="outline" onClick={() => onCategoryChange("Todos")}>Ver todos os aplicativos</Button>
+          </div>
+        )}
       </div>
     </section>
   );
