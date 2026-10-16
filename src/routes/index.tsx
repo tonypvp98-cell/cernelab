@@ -32,7 +32,6 @@ import {
 import ironformCover from "@/assets/ironform-cover.jpg";
 import financasCover from "@/assets/financas-cover.jpg";
 import cerneLogo from "@/assets/cerne-logo.png";
-import { ProductDemo } from "@/components/product-demo";
 import { StorefrontBundles, StorefrontTestimonials, StorefrontChangelog } from "@/components/storefront-sections";
 import { catalogCategories, filterProducts, type CatalogCategory } from "@/lib/storefront-content";
 
@@ -394,7 +393,6 @@ function Catalog({ activeCategory, onCategoryChange }: { activeCategory: Catalog
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               </Button>
-              <ProductDemo product={p} />
               </div>
             </div>
           </article>
@@ -411,44 +409,34 @@ function Catalog({ activeCategory, onCategoryChange }: { activeCategory: Catalog
 }
 
 function ProductMedia({ product }: { product: Product }) {
-  const mediaSource = product.demoGif ?? product.cover;
-
   return (
-    <div className="relative overflow-hidden rounded-xl">
-      <div aria-hidden="true" className="absolute inset-0 bg-tech-grid" />
-      <div
-        className={
-          product.frame === "desktop"
-            ? "relative z-10 aspect-[16/10] w-full overflow-hidden rounded-lg border border-neon/25 bg-background shadow-neon transition-transform duration-500 group-hover:scale-[1.005]"
-            : "relative z-10 aspect-[16/10] w-full overflow-hidden rounded-lg border border-neon/25 bg-background shadow-neon transition-transform duration-500 group-hover:scale-[1.005]"
-        }
-      >
+    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-neon/25 bg-background [contain:layout_paint]">
+      {product.demoVideo ? (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster={product.cover}
+          aria-label={`Demonstração do ${product.name}`}
+          width={1024}
+          height={640}
+          className="absolute inset-0 h-full w-full object-contain"
+        >
+          <source src={product.demoVideo} type="video/mp4" />
+        </video>
+      ) : (
         <img
-          src={mediaSource}
+          src={product.demoGif ?? product.cover}
           alt={product.alt}
           width={1024}
           height={640}
           loading="lazy"
-          onError={(event) => {
-            if (event.currentTarget.src !== product.cover) event.currentTarget.src = product.cover;
-          }}
-          className="block h-full w-full object-contain"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-contain"
         />
-        {product.demoVideo && (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster={product.cover}
-            aria-label={`Demonstração do ${product.name}`}
-            onLoadedData={(event) => event.currentTarget.classList.remove("opacity-0")}
-            className="absolute inset-0 z-10 h-full w-full object-contain opacity-0 transition-opacity duration-500"
-          >
-            <source src={product.demoVideo} />
-          </video>
-        )}
-      </div>
+      )}
     </div>
   );
 }
