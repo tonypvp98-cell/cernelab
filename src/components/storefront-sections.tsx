@@ -13,9 +13,9 @@ export function StorefrontBundles() {
 }
 
 export function StorefrontTestimonials() {
-  const items = publishedTestimonials(testimonials);
+  const items = publishedTestimonials(testimonials).slice(0, 3);
   if (!items.length) return null;
-  return <section id="depoimentos" className="mx-auto max-w-6xl px-5 py-16 sm:px-8"><p className="text-xs font-semibold uppercase text-gold">Na rotina de quem empreende</p><h2 className="mt-2 text-3xl font-bold">Quem usa, conta</h2><div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map(item => <figure key={item.id} className="glass rounded-2xl p-6"><Quote className="h-6 w-6 text-primary" /><blockquote className="mt-4 text-sm leading-relaxed">“{item.quote}”</blockquote><figcaption className="mt-6 border-t border-border pt-4"><p className="text-sm font-semibold">{item.name}</p><p className="mt-1 text-xs text-muted-foreground">{item.role}</p></figcaption></figure>)}</div></section>;
+  return <section id="depoimentos" className="mx-auto max-w-6xl px-5 py-16 sm:px-8"><p className="text-xs font-semibold uppercase text-gold">Depoimentos</p><h2 className="mt-2 text-3xl font-bold">Depoimentos</h2><div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map(item => <figure key={item.id} className="glass rounded-2xl p-6"><Quote className="h-6 w-6 text-primary" /><blockquote className="mt-4 text-sm leading-relaxed">“{item.quote}”</blockquote><figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-4">{item.photo && <img src={item.photo} alt={item.name} loading="lazy" className="h-10 w-10 rounded-full object-cover" />}<div><p className="text-sm font-semibold">{item.name}</p><p className="mt-1 text-xs text-muted-foreground">{item.role}</p></div></figcaption></figure>)}</div></section>;
 }
 
 export function StorefrontChangelog() {
