@@ -181,7 +181,7 @@ const pwaSteps = [
 function Index() {
   const showAllProducts = () => {};
   return (
-    <div id="top" className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div id="top" className="relative min-h-screen overflow-x-clip bg-background text-foreground">
       {/* Technical grid */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[720px] bg-tech-grid" />
 
