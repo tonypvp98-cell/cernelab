@@ -33,11 +33,11 @@ import ironformCover from "@/assets/ironform-cover.jpg";
 import financasCover from "@/assets/financas-cover.jpg";
 import cerneLogo from "@/assets/cerne-logo.png";
 import { StorefrontBundles, StorefrontTestimonials, StorefrontChangelog } from "@/components/storefront-sections";
-import { catalogCategories, filterProducts, type CatalogCategory } from "@/lib/storefront-content";
 
-const TITLE = "Cerne Lab — Hub de Aplicativos PWA";
+
+const TITLE = "Finanças e Produtividade — Cerne Lab";
 const DESCRIPTION =
-  "Soluções Digitais Essenciais: aplicativos web (PWA) rápidos, sem instalação por loja e com acesso vitalício. Finanças & Metas e Ironform — pague uma vez, use para sempre.";
+  "Soluções Digitais Essenciais: aplicativos web (PWA) rápidos, sem instalação por loja e com acesso vitalício. Finanças e Produtividade: finanças, rotina e metas em um só app. Pagamento único, acesso vitalício.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,7 +60,6 @@ type Product = {
   name: string;
   tagline: string;
   category: string;
-  filters: readonly CatalogCategory[];
   description: string;
   originalPrice: string;
   price: string;
@@ -74,16 +73,15 @@ type Product = {
 
 const products: Product[] = [
   {
-    name: "Finanças & Metas",
+    name: "Finanças e Produtividade",
     tagline: "Controle financeiro inteligente",
     category: "Gestão Financeira",
-    filters: ["Finanças"],
     description:
-      "Organize gastos, defina metas e veja seu dinheiro trabalhar com painéis claros e alertas automáticos.",
+      "Registre seus gastos, acompanhe sua rotina de alta performance e evolua nas suas metas em um só painel.",
     originalPrice: "R$ 31,25",
     price: "R$ 25,00",
     cover: financasCover,
-    alt: "Painel do Finanças & Metas em uma moldura digital",
+    alt: "Painel do Finanças e Produtividade em uma moldura digital",
     link: "https://whop.com/cernelab/financas-metas-acesso-vitalicio/",
     frame: "desktop",
   },
@@ -91,7 +89,6 @@ const products: Product[] = [
     name: "Ironform",
     tagline: "Gym & AI Coach",
     category: "Fitness & Treino",
-    filters: [],
     description:
       "Treinos personalizados por IA, acompanhamento de cargas e evolução em tempo real — seu personal no bolso.",
     originalPrice: "R$ 31,25",
@@ -139,12 +136,29 @@ const faqs = [
 const highlights = ["Acesso via Link", "Sem Download de Loja", "Funciona em Qualquer Dispositivo"];
 
 const navigation = [
-  { label: "Ecossistema", href: "#ecossistema" },
-  { label: "Finanças & Metas", href: "#financas-metas" },
-  { label: "Ironform", href: "#ironform" },
+  { label: "O app", href: "#aplicativos" },
+  { label: "Funcionalidades", href: "#o-que-o-app-faz" },
+  { label: "Vídeo", href: "#video" },
   { label: "Comparativo", href: "#comparativo" },
   { label: "Garantia", href: "#garantia" },
+  { label: "FAQ", href: "#faq" },
 ];
+
+const MAIN_PRODUCT = products[0]!;
+const MAIN_CHECKOUT = MAIN_PRODUCT.link;
+// [SUBSTITUIR] — preencha com os arquivos/URLs reais; null exibe o aviso de placeholder.
+const HERO_DASHBOARD_IMAGE: string | null = null;
+const DEMO_VIDEO_EMBED_URL: string | null = null;
+
+const features: { title: string; text: string; image: string | null }[] = [
+  { title: "Dashboard", text: "Caixa atual, horas produtivas da semana e progresso da meta principal em uma única tela.", image: null },
+  { title: "Finanças", text: "Registro de gastos, distribuição e ranking por categoria.", image: null },
+  { title: "Rotina de Alta Performance", text: "Checklist diário de blocos de estudo e trabalho.", image: null },
+  { title: "Metas de Setup", text: "[SUBSTITUIR: descrição curta das Metas de Setup]", image: null },
+  { title: "Consultor IA", text: "Análise das suas finanças e rotina a partir dos seus registros.", image: null },
+];
+
+const strip = ["Pagamento único", "Acesso vitalício", "Celular e computador", "Garantia de 7 dias"];
 
 const pwaSteps = [
   {
@@ -165,10 +179,9 @@ const pwaSteps = [
 ];
 
 function Index() {
-  const [activeCategory, setActiveCategory] = useState<CatalogCategory>("Todos");
-  const showAllProducts = () => setActiveCategory("Todos");
+  const showAllProducts = () => {};
   return (
-    <div id="top" className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div id="top" className="relative min-h-screen overflow-x-clip bg-background text-foreground">
       {/* Technical grid */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[720px] bg-tech-grid" />
 
@@ -176,7 +189,10 @@ function Index() {
 
       <main className="relative">
         <Hero onNavigate={showAllProducts} />
-        <Catalog activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+        <HighlightsStrip />
+        <Catalog items={[MAIN_PRODUCT]} id="aplicativos" eyebrow="O aplicativo" title="Finanças e Produtividade" />
+        <Features />
+        <VideoSection />
         <StorefrontBundles />
         <PwaAdvantages />
         <HowItWorks />
@@ -184,6 +200,8 @@ function Index() {
         <StorefrontTestimonials />
         <StorefrontChangelog />
         <Faq />
+        <FinalCta />
+        <Catalog items={products.slice(1)} id="outros-apps" eyebrow="Ecossistema Cerne Lab" title="Outros apps" />
       </main>
 
       <Footer />
@@ -228,7 +246,7 @@ function Header({ onNavigate }: { onNavigate: () => void }) {
           size="sm"
           className="glass shrink-0 rounded-md border-gold/40 px-4 font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
         >
-          <a href="#aplicativos" onClick={onNavigate}>Garantir Acesso</a>
+          <a href={MAIN_CHECKOUT} target="_blank" rel="noopener noreferrer">Garantir acesso</a>
         </Button>
         </div>
         <Button
@@ -237,7 +255,7 @@ function Header({ onNavigate }: { onNavigate: () => void }) {
           size="sm"
           className="glass shrink-0 rounded-md border-gold/40 px-3 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold lg:hidden"
         >
-          <a href="#aplicativos" onClick={onNavigate}>Garantir Acesso</a>
+          <a href={MAIN_CHECKOUT} target="_blank" rel="noopener noreferrer">Garantir acesso</a>
         </Button>
         <Button
           variant="outline"
@@ -301,59 +319,30 @@ function Hero({ onNavigate }: { onNavigate: () => void }) {
       </a>
       </Button>
 
-      <div
-        role="img"
-        aria-label="Banner da Cerne Lab — Soluções Digitais Essenciais"
-        className="glass glow-border relative mx-auto mt-16 grid min-h-64 max-w-5xl overflow-hidden rounded-2xl border-neon/20 bg-[linear-gradient(135deg,var(--background)_0%,var(--secondary)_48%,color-mix(in_oklab,var(--neon)_14%,var(--background))_100%)] px-6 py-10 text-left sm:min-h-80 sm:px-12 sm:py-12"
-      >
-        <div aria-hidden="true" className="absolute inset-0 bg-tech-grid opacity-60" />
-        <div aria-hidden="true" className="absolute -right-20 top-1/2 h-56 w-56 -translate-y-1/2 rotate-45 border border-neon/20 sm:right-6 sm:h-64 sm:w-64" />
-        <div aria-hidden="true" className="absolute -right-10 top-1/2 h-36 w-36 -translate-y-1/2 rotate-45 border border-neon/50 sm:right-20 sm:h-44 sm:w-44" />
-        <div className="relative z-10 my-auto max-w-xl">
-          <div className="mb-6 flex items-center gap-3">
-            <img src={cerneLogo} alt="" className="h-12 w-auto" width={209} height={256} />
-            <p className="font-display text-lg font-bold">Cerne <span className="text-neon">Lab</span></p>
-          </div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-neon">Ecossistema PWA</p>
-          <h2 className="mt-3 max-w-lg text-3xl font-bold leading-tight sm:text-5xl">
-            Soluções Digitais <span className="text-neon">Essenciais</span>
-          </h2>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Tecnologia prática para organizar suas finanças e elevar sua performance.
-          </p>
-        </div>
-      </div>
+      <PhoneMockup />
     </section>
   );
 }
 
-function Catalog({ activeCategory, onCategoryChange }: { activeCategory: CatalogCategory; onCategoryChange: (category: CatalogCategory) => void }) {
-  const visibleProducts = filterProducts(products, activeCategory);
+function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; eyebrow: string; title: string }) {
+  const visibleProducts = items;
   return (
-    <section id="aplicativos" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8">
+    <section id={id} className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8">
       <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Catálogo</p>
-          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Nossos aplicativos</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">{eyebrow}</p>
+          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">{title}</h2>
         </div>
         <p className="max-w-sm text-sm text-muted-foreground">
           Pagamento único, acesso vitalício e liberação automática.
         </p>
       </div>
 
-      <div role="group" aria-label="Filtrar aplicativos por categoria" className="mb-8 flex flex-wrap gap-2">
-        {catalogCategories.map(category => (
-          <Button key={category} variant={activeCategory === category ? "default" : "outline"} aria-pressed={activeCategory === category} onClick={() => onCategoryChange(category)} className={`min-h-10 rounded-lg px-4 ${activeCategory === category ? "" : "border-glass-border bg-glass text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}>
-            {category}
-          </Button>
-        ))}
-      </div>
-      <p role="status" className="sr-only">{visibleProducts.length} aplicativos encontrados</p>
-      <div className="grid min-h-64 gap-6 sm:grid-cols-2">
+      <div className="mx-auto grid max-w-xl gap-6">
         {visibleProducts.map((p) => (
           <article
             key={p.name}
-            id={p.name === "Finanças & Metas" ? "financas-metas" : "ironform"}
+            id={p.name === "Ironform" ? "ironform" : "financas-produtividade"}
             className="glass glow-border group flex scroll-mt-24 flex-col overflow-hidden rounded-2xl"
           >
             <div className="relative border-b border-glass-border bg-secondary/20 p-0.5">
@@ -397,12 +386,6 @@ function Catalog({ activeCategory, onCategoryChange }: { activeCategory: Catalog
             </div>
           </article>
         ))}
-        {visibleProducts.length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center gap-4 border-y border-border py-12 text-center">
-            <p className="text-lg font-semibold">Nenhum aplicativo nesta categoria ainda.</p>
-            <Button variant="outline" onClick={() => onCategoryChange("Todos")}>Ver todos os aplicativos</Button>
-          </div>
-        )}
       </div>
     </section>
   );
@@ -450,7 +433,7 @@ function PwaAdvantages() {
           O formato certo para o seu dia a dia
         </h2>
         <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Tecnologia web de alta performance: O PWA roda direto do navegador, ocupa 0MB da memória do seu celular e elimina as assinaturas mensais abusivas das lojas tradicionais.
+          Tecnologia web de alta performance: O PWA roda direto do navegador, ocupa 0MB da memória do seu celular e dispensa assinatura — enquanto muitos apps cobram mensalidade.
         </p>
       </div>
        <div className="grid gap-5 sm:grid-cols-3">
@@ -515,7 +498,7 @@ function HowItWorks() {
 const comparisonRows = [
   {
     label: "Custo",
-    common: "Mensalidade Recorrente (R$ 30–50/mês)",
+    common: "Muitos apps cobram mensalidade",
     cerne: "Pagamento Único (R$ 25,00 Vitalício)",
   },
   {
@@ -530,6 +513,101 @@ const comparisonRows = [
   },
 ];
 
+function Placeholder({ label, className = "" }: { label: string; className?: string }) {
+  return (
+    <div className={`grid place-items-center border border-dashed border-neon/40 bg-secondary/40 p-4 text-center text-xs font-semibold text-muted-foreground ${className}`}>
+      {label}
+    </div>
+  );
+}
+
+function PhoneMockup() {
+  return (
+    <div className="mx-auto mt-12 w-56 rounded-[2.25rem] border border-neon/30 bg-secondary p-2 shadow-neon sm:w-64">
+      <div className="relative aspect-[9/19] overflow-hidden rounded-[1.75rem] bg-background">
+        <span aria-hidden="true" className="absolute left-1/2 top-2 z-10 h-4 w-16 -translate-x-1/2 rounded-full bg-secondary" />
+        {HERO_DASHBOARD_IMAGE ? (
+          <img src={HERO_DASHBOARD_IMAGE} alt="Dashboard do Finanças e Produtividade" className="h-full w-full object-cover" />
+        ) : (
+          <Placeholder label="[SUBSTITUIR: print do dashboard]" className="h-full w-full rounded-[1.75rem]" />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function HighlightsStrip() {
+  return (
+    <div className="border-y border-glass-border bg-secondary/30">
+      <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-5 py-5 text-sm font-semibold sm:flex sm:justify-center sm:gap-8 sm:px-8">
+        {strip.map((item) => (
+          <li key={item} className="flex items-center gap-2">
+            <Check className="h-4 w-4 shrink-0 text-neon" strokeWidth={3} />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Features() {
+  return (
+    <section id="o-que-o-app-faz" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Funcionalidades</p>
+      <h2 className="mt-2 text-3xl font-bold sm:text-4xl">O que o app faz</h2>
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <article key={f.title} className="glass glow-border overflow-hidden rounded-2xl">
+            {f.image ? (
+              <img src={f.image} alt={`Tela ${f.title}`} loading="lazy" className="aspect-[16/10] w-full object-cover" />
+            ) : (
+              <Placeholder label={`[SUBSTITUIR: print ${f.title}]`} className="aspect-[16/10] w-full" />
+            )}
+            <div className="p-5">
+              <h3 className="text-lg font-semibold">{f.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function VideoSection() {
+  return (
+    <section id="video" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 text-center sm:px-8">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Demonstração</p>
+      <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Veja o app em 20 segundos</h2>
+      <div className="mx-auto mt-8 aspect-[9/16] w-full max-w-xs overflow-hidden rounded-2xl border border-neon/25 bg-background">
+        {DEMO_VIDEO_EMBED_URL ? (
+          <iframe src={DEMO_VIDEO_EMBED_URL} title="Vídeo do Finanças e Produtividade" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen className="h-full w-full" />
+        ) : (
+          <Placeholder label="[SUBSTITUIR: URL do vídeo]" className="h-full w-full rounded-2xl" />
+        )}
+      </div>
+    </section>
+  );
+}
+
+function FinalCta() {
+  return (
+    <section className="mx-auto max-w-3xl px-5 py-16 text-center sm:px-8">
+      <div className="glass glow-border rounded-2xl border-neon/20 p-8 sm:p-10">
+        <h2 className="text-2xl font-bold sm:text-3xl">Comece hoje com o Finanças e Produtividade</h2>
+        <p className="mt-3 text-sm text-muted-foreground">Pagamento único • acesso vitalício • garantia de 7 dias pela Whop.</p>
+        <Button asChild className="btn-neon mt-6 h-12 rounded-full px-7 text-sm font-semibold">
+          <a href={MAIN_CHECKOUT} target="_blank" rel="noopener noreferrer">
+            Garantir acesso
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </Button>
+      </div>
+    </section>
+  );
+}
+
 function Guarantee() {
   return (
     <section id="garantia" className="mx-auto max-w-4xl scroll-mt-24 px-5 py-16 sm:px-8">
@@ -543,7 +621,7 @@ function Guarantee() {
               Garantia Incondicional de 7 Dias — Risco Zero
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Experimente os aplicativos com tranquilidade. Se dentro de 7 dias você entender que a ferramenta não atendeu às suas expectativas, solicitamos o reembolso integral direto pela Hotmart/Whop. Sem perguntas, sem burocracia e sem letras miúdas.
+              Experimente os aplicativos com tranquilidade. Se dentro de 7 dias você entender que a ferramenta não atendeu às suas expectativas, solicitamos o reembolso integral direto pela Whop. Sem perguntas, sem burocracia e sem letras miúdas.
             </p>
           </div>
         </div>

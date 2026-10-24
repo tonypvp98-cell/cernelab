@@ -20,6 +20,7 @@ export type Testimonial = {
   name: string;
   role: string;
   quote: string;
+  photo?: string;
   authorized: boolean;
 };
 export type ReleaseNote = {
