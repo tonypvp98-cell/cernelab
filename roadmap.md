@@ -17,3 +17,4 @@
 - [x] Integrar combos, depoimentos e atualizações sem publicar conteúdo não confirmado
 - [x] Validar links de compra, suporte, filtros e demonstrações no computador e celular
 - [x] Atualizar detalhes visuais para esmeralda e dourado e validar navegação e demos
+- [x] Focar a página no Finanças e Produtividade (novas seções, vídeo, CTA fixo, Outros apps)
