@@ -144,7 +144,8 @@ const navigation = [
   { label: "FAQ", href: "#faq" },
 ];
 
-const MAIN_CHECKOUT = products[0].link;
+const MAIN_PRODUCT = products[0]!;
+const MAIN_CHECKOUT = MAIN_PRODUCT.link;
 // [SUBSTITUIR] — preencha com os arquivos/URLs reais; null exibe o aviso de placeholder.
 const HERO_DASHBOARD_IMAGE: string | null = null;
 const DEMO_VIDEO_EMBED_URL: string | null = null;
@@ -189,7 +190,7 @@ function Index() {
       <main className="relative">
         <Hero onNavigate={showAllProducts} />
         <HighlightsStrip />
-        <Catalog items={[products[0]]} id="aplicativos" eyebrow="O aplicativo" title="Finanças e Produtividade" />
+        <Catalog items={[MAIN_PRODUCT]} id="aplicativos" eyebrow="O aplicativo" title="Finanças e Produtividade" />
         <Features />
         <VideoSection />
         <StorefrontBundles />
