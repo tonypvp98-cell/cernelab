@@ -18,3 +18,6 @@
 - [x] Validar links de compra, suporte, filtros e demonstrações no computador e celular
 - [x] Atualizar detalhes visuais para esmeralda e dourado e validar navegação e demos
 - [x] Focar a página no Finanças e Produtividade (novas seções, vídeo, CTA fixo, Outros apps)
+- [ ] Revisar proporções e espaçamento preservando o visual existente
+- [ ] Remover provisórios públicos e preparar mídia real sem telas artificiais
+- [ ] Validar navegação, conteúdo e layout no celular, tablet e desktop
