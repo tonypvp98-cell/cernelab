@@ -272,7 +272,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="ecossistema" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-8 pt-10 sm:px-8 sm:pb-12 sm:pt-14">
+    <section id="ecossistema" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-6 pt-6 sm:px-8 sm:pb-12 sm:pt-14">
       <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
         <span className="h-1.5 w-1.5 rounded-full bg-neon" /> Ecossistema PWA • Acesso Imediato
       </span>
@@ -282,14 +282,14 @@ function Hero() {
       <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
         Tecnologia prática para organizar suas finanças, acelerar suas vendas e elevar sua performance.
       </p>
-      <div className="mt-6 grid items-center gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
+      <div className="mt-4 grid items-center gap-4 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
         <div className="min-w-0">
           <p className="text-lg font-semibold sm:text-2xl">Finanças e Produtividade</p>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">Finanças, rotina e metas em um só painel.</p>
           <Button asChild className="btn-neon mt-5 h-12 rounded-xl px-6 text-sm font-semibold">
             <a href="#aplicativos">Conhecer o app <ArrowUpRight className="h-4 w-4" /></a>
           </Button>
-          <ul className="mt-5 grid gap-2 text-xs text-muted-foreground sm:text-sm">
+          <ul className="mt-4 grid gap-1.5 text-xs text-muted-foreground sm:text-sm">
             {highlights.map(h => <li key={h} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-neon" />{h}</li>)}
           </ul>
         </div>
@@ -367,6 +367,9 @@ function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; 
 }
 
 function ProductMedia({ product }: { product: Product }) {
+  if (!product.cover && !product.demoVideo) {
+    return <LandingMedia src={null} alt={`Dashboard do ${product.name}`} />;
+  }
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-neon/25 bg-background [contain:layout_paint]">
       {product.demoVideo ? (
@@ -394,7 +397,7 @@ function ProductMedia({ product }: { product: Product }) {
           decoding="async"
           className="absolute inset-0 h-full w-full object-contain"
         />
-      ) : <LandingMedia src={null} alt={`Dashboard do ${product.name}`} />}
+      ) : null}
     </div>
   );
 }
