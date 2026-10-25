@@ -176,7 +176,7 @@ function Index() {
 
       <main className="relative">
         <Hero />
-        <Catalog items={[MAIN_PRODUCT]} id="aplicativos" eyebrow="O aplicativo" title="Finanças e Produtividade" />
+        <Catalog items={products.slice(0, 1)} id="aplicativos" eyebrow="O aplicativo" title="Finanças e Produtividade" />
         <Features />
         <VideoSection />
         <StorefrontBundles />
