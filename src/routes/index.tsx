@@ -31,6 +31,9 @@ import {
 } from "@/components/ui/dialog";
 import ironformCover from "@/assets/ironform-cover.jpg";
 import { LandingMedia } from "@/components/landing-media";
+import financasMain from "@/assets/cernelab_financas_peca1_principal_1600x1000.png.asset.json";
+import financasMainMobile from "@/assets/cernelab_financas_peca1_principal_mobile_1200x900.png.asset.json";
+import financasFeatures from "@/assets/cernelab_financas_peca2_funcionalidades_1920x1080.png.asset.json";
 import { landingFeatures, landingMedia, visibleFeatures } from "@/lib/landing-content";
 import cerneLogo from "@/assets/cerne-logo.png";
 import { StorefrontBundles, StorefrontTestimonials, StorefrontChangelog } from "@/components/storefront-sections";
@@ -70,6 +73,8 @@ type Product = {
   frame: "desktop" | "mobile";
   demoVideo?: string;
   demoGif?: string;
+  coverMobile?: string;
+  sampleData?: boolean;
 };
 
 const products: Product[] = [
@@ -81,8 +86,10 @@ const products: Product[] = [
       "Registre seus gastos, acompanhe sua rotina de alta performance e evolua nas suas metas em um só painel.",
     originalPrice: "R$ 31,25",
     price: "R$ 25,00",
-    cover: landingMedia.dashboard,
-    alt: "Painel do Finanças e Produtividade em uma moldura digital",
+    cover: financasMain.url,
+    coverMobile: financasMainMobile.url,
+    sampleData: true,
+    alt: "Telas do aplicativo Finanças e Produtividade no celular: painel de Finanças com gastos do mês e Dashboard com caixa atual, horas produtivas e progresso da meta principal.",
     link: "https://whop.com/cernelab/financas-metas-acesso-vitalicio/",
     frame: "desktop",
   },
@@ -371,34 +378,21 @@ function ProductMedia({ product }: { product: Product }) {
     return <LandingMedia src={null} alt={`Dashboard do ${product.name}`} />;
   }
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-neon/25 bg-background [contain:layout_paint]">
-      {product.demoVideo ? (
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster={product.cover ?? undefined}
-          aria-label={`Demonstração do ${product.name}`}
-          width={1024}
-          height={640}
-          className="absolute inset-0 h-full w-full object-contain"
-        >
-          <source src={product.demoVideo} type="video/mp4" />
-        </video>
-      ) : product.cover ? (
-        <img
-          src={product.demoGif ?? product.cover}
-          alt={product.alt}
-          width={1024}
-          height={640}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-contain"
-        />
-      ) : null}
-    </div>
+    <figure className="w-full">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-neon/25 bg-background [contain:layout_paint] sm:aspect-[16/10]">
+        {product.demoVideo ? (
+          <video autoPlay loop muted playsInline preload="metadata" poster={product.cover ?? undefined} aria-label={`Demonstração do ${product.name}`} width={1024} height={640} className="absolute inset-0 h-full w-full object-contain">
+            <source src={product.demoVideo} type="video/mp4" />
+          </video>
+        ) : product.cover ? (
+          <picture>
+            {product.coverMobile && <source media="(max-width: 640px)" srcSet={product.coverMobile} width={1200} height={900} />}
+            <img src={product.demoGif ?? product.cover} alt={product.alt} width={1600} height={1000} loading="lazy" decoding="async" className={`absolute inset-0 h-full w-full ${product.coverMobile ? "object-cover" : "object-contain"}`} />
+          </picture>
+        ) : null}
+      </div>
+      {product.sampleData && <figcaption className="mt-1.5 text-center text-[11px] text-muted-foreground">Dados de exemplo</figcaption>}
+    </figure>
   );
 }
 
@@ -516,7 +510,12 @@ function VideoSection() {
         <p className="text-xs font-semibold uppercase text-neon">Demonstração</p>
         <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Produtividade em ação</h2>
       </div>
-      <LandingMedia src={landingMedia.video} alt="Vídeo do Finanças e Produtividade" kind="video" />
+      <figure className="w-full">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-neon/20 bg-background [contain:layout_paint]">
+          <img src={financasFeatures.url} alt="Três telas do aplicativo Finanças e Produtividade: Rotina de Alta Performance, Consultor IA com projeção da meta principal e gráfico de distribuição de gastos por categoria." width={1920} height={1080} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+        </div>
+        <figcaption className="mt-1.5 text-center text-[11px] text-muted-foreground">Dados de exemplo</figcaption>
+      </figure>
     </section>
   );
 }
