@@ -39,9 +39,9 @@ import cerneLogo from "@/assets/cerne-logo.png";
 import { StorefrontBundles, StorefrontTestimonials, StorefrontChangelog } from "@/components/storefront-sections";
 
 
-const TITLE = "Finanças e Produtividade — Cerne Lab";
+const TITLE = "Fluxo Vendas — Dashboard de Vendas | Cerne Lab";
 const DESCRIPTION =
-  "Soluções Digitais Essenciais: aplicativos web (PWA) rápidos, sem instalação por loja e com acesso vitalício. Finanças e Produtividade: finanças, rotina e metas em um só app. Pagamento único, acesso vitalício.";
+  "Fluxo Vendas: acompanhe vendas, faturamento, lucro e estoque do seu comércio em uma interface organizada. Conheça também o Finanças e Produtividade da Cerne Lab.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -144,9 +144,8 @@ const faqs = [
 const highlights = ["Acesso via Link", "Sem Download de Loja", "Funciona em Qualquer Dispositivo"];
 
 const navigation = [
-  { label: "O app", href: "#aplicativos" },
-  { label: "Funcionalidades", href: "#o-que-o-app-faz" },
-  { label: "Vídeo", href: "#video" },
+  { label: "Fluxo Vendas", href: "#fluxo-vendas" },
+  { label: "Finanças", href: "#aplicativos" },
   { label: "Comparativo", href: "#comparativo" },
   { label: "Garantia", href: "#garantia" },
   { label: "FAQ", href: "#faq" },
@@ -183,7 +182,8 @@ function Index() {
 
       <main className="relative">
         <Hero />
-        <Catalog items={products.slice(0, 1)} id="aplicativos" eyebrow="O aplicativo" title="Finanças e Produtividade" />
+        <FluxoVendas />
+        <Catalog items={products.slice(0, 1)} id="aplicativos" eyebrow="Também da Cerne Lab" title="Finanças e Produtividade" />
         <Features />
         <VideoSection />
         <StorefrontBundles />
@@ -277,30 +277,49 @@ function Header() {
   );
 }
 
+const fluxoPillars = [
+  { title: "Vendas", text: "Acompanhe as vendas do comércio em uma interface organizada." },
+  { title: "Faturamento", text: "Visualize o faturamento do negócio em um só lugar." },
+  { title: "Lucro", text: "Tenha mais clareza sobre o lucro das suas operações." },
+  { title: "Estoque", text: "Acompanhe as informações de estoque junto com as vendas." },
+];
+
 function Hero() {
   return (
     <section id="ecossistema" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-6 pt-6 sm:px-8 sm:pb-12 sm:pt-14">
-      <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
-        <span className="h-1.5 w-1.5 rounded-full bg-neon" /> Ecossistema PWA • Acesso Imediato
-      </span>
-      <h1 className="mt-4 max-w-4xl text-3xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-        Soluções Digitais Essenciais para <span className="text-neon">o seu Negócio</span>
-      </h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-        Tecnologia prática para organizar suas finanças, acelerar suas vendas e elevar sua performance.
-      </p>
-      <div className="mt-4 grid items-center gap-4 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
+      <div className="grid items-center gap-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12">
         <div className="min-w-0">
-          <p className="text-lg font-semibold sm:text-2xl">Finanças e Produtividade</p>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">Finanças, rotina e metas em um só painel.</p>
-          <Button asChild className="btn-neon mt-5 h-12 rounded-xl px-6 text-sm font-semibold">
-            <a href="#aplicativos">Conhecer o app <ArrowUpRight className="h-4 w-4" /></a>
+          <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-neon" /> Fluxo Vendas • Dashboard de Vendas
+          </span>
+          <h1 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
+            Tenha uma visão mais clara das <span className="text-neon">vendas do seu negócio.</span>
+          </h1>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Acompanhe informações importantes do comércio em uma interface organizada, com foco em vendas, faturamento, lucro e estoque.
+          </p>
+          <Button asChild className="btn-neon mt-6 h-12 rounded-xl px-6 text-sm font-semibold">
+            <a href="#fluxo-vendas">Conhecer o Fluxo Vendas <ArrowUpRight className="h-4 w-4" /></a>
           </Button>
-          <ul className="mt-4 grid gap-1.5 text-xs text-muted-foreground sm:text-sm">
-            {highlights.map(h => <li key={h} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-neon" />{h}</li>)}
-          </ul>
         </div>
-        <LandingMedia src={landingMedia.hero} alt="Mockup principal do Finanças e Produtividade" priority />
+        <LandingMedia src={landingMedia.hero} alt="Dashboard do Fluxo Vendas" priority />
+      </div>
+    </section>
+  );
+}
+
+function FluxoVendas() {
+  return (
+    <section id="fluxo-vendas" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Fluxo Vendas</p>
+      <h2 className="mt-2 text-3xl font-bold sm:text-4xl">O que você acompanha</h2>
+      <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {fluxoPillars.map((p) => (
+          <div key={p.title} className="glass rounded-2xl p-5">
+            <h3 className="text-lg font-bold">{p.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
