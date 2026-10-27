@@ -277,32 +277,51 @@ function Header() {
   );
 }
 
+// Conecte aqui o destino real (formulário ou canal de contato) quando estiver definido.
+const FLUXO_INTEREST_URL: string | null = null;
+
 const fluxoPillars = [
-  { title: "Vendas", text: "Acompanhe as vendas do comércio em uma interface organizada." },
-  { title: "Faturamento", text: "Visualize o faturamento do negócio em um só lugar." },
-  { title: "Lucro", text: "Tenha mais clareza sobre o lucro das suas operações." },
-  { title: "Estoque", text: "Acompanhe as informações de estoque junto com as vendas." },
+  { title: "Vendas", text: "Como as vendas do comércio aparecem organizadas no painel." },
+  { title: "Faturamento", text: "Onde visualizar o faturamento do negócio." },
+  { title: "Lucro", text: "Como acompanhar o lucro das operações." },
+  { title: "Estoque", text: "Como as informações de estoque aparecem junto às vendas." },
 ];
+
+function FluxoCta() {
+  const label = "Quero conhecer o Fluxo Vendas";
+  if (!FLUXO_INTEREST_URL) {
+    return (
+      <div className="mt-6">
+        <Button disabled className="h-12 rounded-xl bg-fluxo px-6 text-sm font-semibold text-fluxo-foreground">{label}</Button>
+        <p className="mt-2 text-xs text-muted-foreground">Inscrições abrem em breve.</p>
+      </div>
+    );
+  }
+  return (
+    <Button asChild className="mt-6 h-12 rounded-xl bg-fluxo px-6 text-sm font-semibold text-fluxo-foreground shadow-fluxo hover:bg-fluxo/90">
+      <a href={FLUXO_INTEREST_URL} target="_blank" rel="noopener noreferrer">{label} <ArrowUpRight className="h-4 w-4" /></a>
+    </Button>
+  );
+}
 
 function Hero() {
   return (
-    <section id="ecossistema" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-6 pt-6 sm:px-8 sm:pb-12 sm:pt-14">
-      <div className="grid items-center gap-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12">
-        <div className="min-w-0">
-          <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-neon" /> Fluxo Vendas • Dashboard de Vendas
-          </span>
-          <h1 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
-            Tenha uma visão mais clara das <span className="text-neon">vendas do seu negócio.</span>
-          </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Acompanhe informações importantes do comércio em uma interface organizada, com foco em vendas, faturamento, lucro e estoque.
-          </p>
-          <Button asChild className="btn-neon mt-6 h-12 rounded-xl px-6 text-sm font-semibold">
-            <a href="#fluxo-vendas">Conhecer o Fluxo Vendas <ArrowUpRight className="h-4 w-4" /></a>
-          </Button>
-        </div>
-        <LandingMedia src={landingMedia.hero} alt="Dashboard do Fluxo Vendas" priority />
+    <section id="fluxo-vendas" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-6 pt-6 sm:px-8 sm:pb-10 sm:pt-14">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="text-xs font-medium text-muted-foreground">Cerne Lab <span className="mx-1.5">/</span> <span className="font-semibold text-foreground">Fluxo Vendas</span></p>
+        <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-fluxo/30 bg-fluxo/10 px-3 py-1 text-xs font-semibold text-fluxo">
+          <span className="h-1.5 w-1.5 rounded-full bg-fluxo" /> Pré-lançamento · Acesso antecipado
+        </span>
+        <h1 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
+          Mais clareza para acompanhar as <span className="text-fluxo">vendas do seu negócio.</span>
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Acompanhe informações de vendas, faturamento, lucro e estoque em uma interface organizada.
+        </p>
+        <FluxoCta />
+      </div>
+      <div className="mx-auto mt-8 max-w-5xl rounded-3xl border border-fluxo/20 bg-fluxo-surface/5 p-2 shadow-fluxo sm:p-3">
+        <LandingMedia src={landingMedia.hero} alt="Dashboard do Fluxo Vendas" priority className="border-fluxo/20" />
       </div>
     </section>
   );
@@ -310,17 +329,17 @@ function Hero() {
 
 function FluxoVendas() {
   return (
-    <section id="fluxo-vendas" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Fluxo Vendas</p>
-      <h2 className="mt-2 text-3xl font-bold sm:text-4xl">O que você acompanha</h2>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <section id="demonstracao-fluxo" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-10">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-fluxo">Na demonstração</p>
+      <h2 className="mt-2 text-2xl font-bold sm:text-3xl">O que você poderá conhecer</h2>
+      <ul className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
         {fluxoPillars.map((p) => (
-          <div key={p.title} className="glass rounded-2xl p-5">
-            <h3 className="text-lg font-bold">{p.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-          </div>
+          <li key={p.title} className="flex gap-3 border-t border-glass-border pt-4">
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-fluxo" />
+            <div><h3 className="text-base font-bold">{p.title}</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{p.text}</p></div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
