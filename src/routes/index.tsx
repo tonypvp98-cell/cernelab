@@ -237,18 +237,39 @@ function Header() {
           asChild
           variant="outline"
           size="sm"
-          className="glass shrink-0 rounded-md border-gold/40 px-4 font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
+          className="glass shrink-0 rounded-md border-gold/40 px-4 text-left font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
         >
-          <a href={MAIN_CHECKOUT} target="_blank" rel="noopener noreferrer">Garantir acesso</a>
+          <a
+            href={MAIN_CHECKOUT}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Ir para o checkout do Finanças e Produtividade na Whop"
+          >
+            <span className="flex flex-col leading-tight">
+              <span>Garantir acesso</span>
+              <span className="text-[10px] font-medium text-gold/70">Finanças e Produtividade</span>
+            </span>
+          </a>
         </Button>
         </div>
         <Button
           asChild
           variant="outline"
           size="sm"
-          className="glass shrink-0 rounded-md border-gold/40 px-3 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold lg:hidden"
+          className="glass shrink-0 rounded-md border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold lg:hidden"
         >
-          <a href={MAIN_CHECKOUT} target="_blank" rel="noopener noreferrer">Garantir acesso</a>
+          <a
+            href={MAIN_CHECKOUT}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Garantir acesso ao Finanças e Produtividade na Whop"
+            title="Ir para o checkout do Finanças e Produtividade na Whop"
+          >
+            <span className="flex flex-col leading-tight">
+              <span>Garantir acesso</span>
+              <span className="text-[9px] font-medium text-gold/70">Finanças e Produtividade</span>
+            </span>
+          </a>
         </Button>
         <Button
           variant="outline"
