@@ -291,6 +291,15 @@ function Header() {
                 {item.label}
               </a>
             ))}
+            <a
+              href={MAIN_CHECKOUT}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => { setIsMenuOpen(false); }}
+              className="mt-1 rounded-md border border-gold/40 px-3 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10"
+            >
+              Garantir acesso — Finanças e Produtividade
+            </a>
           </div>
         </nav>
       )}
