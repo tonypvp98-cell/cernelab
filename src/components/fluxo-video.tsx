@@ -19,7 +19,7 @@ export function FluxoVideo() {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => {
       if (shouldPlayFluxoVideo(motion.matches, manualPlayback.current)) {
-        void video.play().catch(() => setPlaying(false));
+        void video.play().then(() => setPlaying(!video.paused)).catch(() => setPlaying(false));
       } else video.pause();
     };
     // Playback is independent of scroll; the source and video node stay mounted.
