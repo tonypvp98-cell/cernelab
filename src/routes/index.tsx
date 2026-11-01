@@ -29,12 +29,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import ironformCover from "@/assets/ironform-cover.jpg";
+import ironformCover from "@/assets/ironform-cover.webp.asset.json";
+import fluxoHero from "@/assets/fluxo-vendas-hero.webp.asset.json";
+import { FluxoVideo } from "@/components/fluxo-video";
+import { fluxoContact, otherProductsScope } from "@/lib/fluxo-content";
 import { LandingMedia } from "@/components/landing-media";
-import financasMain from "@/assets/cernelab_financas_peca1_principal_1600x1000.png.asset.json";
-import financasMainMobile from "@/assets/cernelab_financas_peca1_principal_mobile_1200x900.png.asset.json";
-import financasFeatures from "@/assets/cernelab_financas_peca2_funcionalidades_1920x1080.png.asset.json";
-import { landingFeatures, landingMedia, visibleFeatures } from "@/lib/landing-content";
+import financasMain from "@/assets/cernelab_financas_peca1_principal_1600x1000.webp.asset.json";
+import financasMainMobile from "@/assets/cernelab_financas_peca1_principal_mobile_1200x900.webp.asset.json";
+import financasFeatures from "@/assets/cernelab_financas_peca2_funcionalidades_1920x1080.webp.asset.json";
+import { landingFeatures, visibleFeatures } from "@/lib/landing-content";
 import cerneLogo from "@/assets/cerne-logo.png";
 import { StorefrontBundles, StorefrontTestimonials, StorefrontChangelog } from "@/components/storefront-sections";
 
@@ -101,7 +104,7 @@ const products: Product[] = [
       "Treinos personalizados por IA, acompanhamento de cargas e evolução em tempo real — seu personal no bolso.",
     originalPrice: "R$ 31,25",
     price: "R$ 25,00",
-    cover: ironformCover,
+    cover: ironformCover.url,
     alt: "Telas do Ironform em molduras digitais",
     link: "https://whop.com/cernelab/ironform-gym-ai-coach/",
     frame: "mobile",
@@ -145,7 +148,7 @@ const highlights = ["Acesso via Link", "Sem Download de Loja", "Funciona em Qual
 
 const navigation = [
   { label: "Fluxo Vendas", href: "#fluxo-vendas" },
-  { label: "Finanças", href: "#aplicativos" },
+  { label: "Outros produtos", href: "#aplicativos" },
   { label: "Comparativo", href: "#comparativo" },
   { label: "Garantia", href: "#garantia" },
   { label: "FAQ", href: "#faq" },
@@ -183,7 +186,8 @@ function Index() {
       <main className="relative">
         <Hero />
         <FluxoVendas />
-        <Catalog items={products.slice(0, 1)} id="aplicativos" eyebrow="Também da Cerne Lab" title="Finanças e Produtividade" />
+        <Catalog items={products} id="aplicativos" eyebrow="Também da Cerne Lab" title="Outros produtos" />
+        <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-sm leading-relaxed text-muted-foreground">{otherProductsScope}</p></div>
         <Features />
         <VideoSection />
         <StorefrontBundles />
@@ -194,7 +198,6 @@ function Index() {
         <StorefrontChangelog />
         <Faq />
         <FinalCta />
-        <Catalog items={products.slice(1)} id="outros-apps" eyebrow="Ecossistema Cerne Lab" title="Outros apps" />
       </main>
 
       <Footer />
@@ -240,14 +243,12 @@ function Header() {
           className="glass shrink-0 rounded-md border-gold/40 px-4 text-left font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
         >
           <a
-            href={MAIN_CHECKOUT}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Ir para o checkout do Finanças e Produtividade na Whop"
+            href="#aplicativos"
+            title="Conhecer Finanças e Produtividade e Ironform"
           >
             <span className="flex flex-col leading-tight">
-              <span>Garantir acesso</span>
-              <span className="text-[10px] font-medium text-gold/70">Finanças e Produtividade</span>
+              <span>Conhecer outros produtos</span>
+              
             </span>
           </a>
         </Button>
@@ -256,18 +257,16 @@ function Header() {
           asChild
           variant="outline"
           size="sm"
-          className="glass shrink-0 rounded-md border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold lg:hidden"
+          className="glass shrink-0 rounded-md border-gold/40 max-w-40 whitespace-normal px-3 py-1.5 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold lg:hidden"
         >
           <a
-            href={MAIN_CHECKOUT}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Garantir acesso ao Finanças e Produtividade na Whop"
-            title="Ir para o checkout do Finanças e Produtividade na Whop"
+            href="#aplicativos"
+            aria-label="Conhecer outros produtos"
+            title="Conhecer Finanças e Produtividade e Ironform"
           >
             <span className="flex flex-col leading-tight">
-              <span>Garantir acesso</span>
-              <span className="text-[9px] font-medium text-gold/70">Finanças e Produtividade</span>
+              <span>Conhecer outros produtos</span>
+              
             </span>
           </a>
         </Button>
@@ -292,13 +291,11 @@ function Header() {
               </a>
             ))}
             <a
-              href={MAIN_CHECKOUT}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#aplicativos"
               onClick={() => { setIsMenuOpen(false); }}
               className="mt-1 rounded-md border border-gold/40 px-3 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10"
             >
-              Garantir acesso — Finanças e Produtividade
+              Conhecer outros produtos
             </a>
           </div>
         </nav>
@@ -306,9 +303,6 @@ function Header() {
     </header>
   );
 }
-
-// Conecte aqui o destino real (formulário ou canal de contato) quando estiver definido.
-const FLUXO_INTEREST_URL: string | null = null;
 
 const fluxoPillars = [
   { title: "Vendas", text: "Como as vendas do comércio aparecem organizadas no painel." },
@@ -318,20 +312,13 @@ const fluxoPillars = [
 ];
 
 function FluxoCta() {
-  const label = "Quero conhecer o Fluxo Vendas";
-  if (!FLUXO_INTEREST_URL) {
-    return (
-      <div className="mt-6">
-        <Button disabled className="h-12 rounded-xl bg-fluxo px-6 text-sm font-semibold text-fluxo-foreground">{label}</Button>
-        <p className="mt-2 text-xs text-muted-foreground">Inscrições abrem em breve.</p>
-      </div>
-    );
-  }
-  return (
-    <Button asChild className="mt-6 h-12 rounded-xl bg-fluxo px-6 text-sm font-semibold text-fluxo-foreground shadow-fluxo hover:bg-fluxo/90">
-      <a href={FLUXO_INTEREST_URL} target="_blank" rel="noopener noreferrer">{label} <ArrowUpRight className="h-4 w-4" /></a>
+  return <div className="mt-6">
+    <Button asChild className="h-auto min-h-12 max-w-full whitespace-normal rounded-xl bg-fluxo px-5 py-3 text-sm font-semibold text-fluxo-foreground shadow-fluxo hover:bg-fluxo/90">
+      <a href={fluxoContact.direct} target="_blank" rel="noopener noreferrer">Quero conhecer o Fluxo Vendas <ArrowUpRight className="h-4 w-4 shrink-0" /></a>
     </Button>
-  );
+    <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-muted-foreground">{fluxoContact.guidance}</p>
+    <a href={fluxoContact.profile} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs text-fluxo underline underline-offset-4">Abrir perfil no Instagram <ArrowUpRight className="h-3 w-3" /></a>
+  </div>;
 }
 
 function Hero() {
@@ -351,7 +338,7 @@ function Hero() {
         <FluxoCta />
       </div>
       <div className="mx-auto mt-8 max-w-5xl rounded-3xl border border-fluxo/20 bg-fluxo-surface/5 p-2 shadow-fluxo sm:p-3">
-        <LandingMedia src={landingMedia.hero} alt="Dashboard do Fluxo Vendas" priority className="border-fluxo/20" />
+        <img src={fluxoHero.url} alt="Fluxo Vendas: painel, vendas e controle de estoque" width={1920} height={1080} loading="eager" fetchPriority="high" decoding="async" className="aspect-video w-full rounded-2xl object-contain" />
       </div>
     </section>
   );
@@ -370,6 +357,7 @@ function FluxoVendas() {
           </li>
         ))}
       </ul>
+      <FluxoVideo />
     </section>
   );
 }
@@ -395,18 +383,14 @@ function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; 
             id={p.name === "Ironform" ? "ironform" : "financas-produtividade"}
             className="glass flex scroll-mt-24 flex-col overflow-hidden rounded-2xl md:grid md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]"
           >
-            <div className="relative flex items-center border-b border-glass-border bg-secondary/20 md:border-b-0 md:border-r">
+            <div className="relative flex min-w-0 items-center border-b border-glass-border bg-secondary/20 md:border-b-0 md:border-r">
               <ProductMedia product={p} />
-              <span className="absolute left-3 top-3 rounded-md border border-neon/40 bg-background/80 px-3 py-1 text-[10px] font-bold uppercase text-neon backdrop-blur-md">
-                {p.category}
-              </span>
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col p-5 lg:p-7">
-              <h3 className="text-2xl font-bold">
-                {p.name}{" "}
-                <span className="text-base font-medium text-muted-foreground">({p.tagline})</span>
-              </h3>
+              <p className="mb-2 text-xs font-semibold text-neon">{p.category}</p>
+              <h3 className="text-2xl font-bold leading-tight">{p.name}</h3>
+              <p className="mt-2 text-sm font-medium text-muted-foreground">{p.tagline}</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {p.description}
               </p>
@@ -455,7 +439,7 @@ function ProductMedia({ product }: { product: Product }) {
         ) : product.cover ? (
           <picture>
             {product.coverMobile && <source media="(max-width: 640px)" srcSet={product.coverMobile} width={1200} height={900} />}
-            <img src={product.demoGif ?? product.cover} alt={product.alt} width={1600} height={1000} loading="lazy" decoding="async" className={`absolute inset-0 h-full w-full ${product.coverMobile ? "object-cover" : "object-contain"}`} />
+            <img src={product.demoGif ?? product.cover} alt={product.alt} width={1600} height={1000} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
           </picture>
         ) : null}
       </div>
@@ -498,7 +482,7 @@ function HowItWorks() {
       <div className="border-y border-glass-border py-6">
         <div className="mb-5 max-w-xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Como funciona</p>
-          <h3 className="mt-2 text-2xl font-bold sm:text-3xl">Do pagamento à sua tela em 3 passos</h3>
+          <h3 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Ironform: da compra à sua tela</h3>
         </div>
         <ol className="grid gap-4 sm:grid-cols-3">
           {pwaSteps.map(({ icon: Icon, title, text }, index) => (
@@ -558,7 +542,7 @@ function Features() {
   return (
     <section id="o-que-o-app-faz" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
       <p className="text-xs font-semibold uppercase text-neon">Funcionalidades</p>
-      <h2 className="mt-2 text-2xl font-bold sm:text-3xl">O que o app faz</h2>
+      <h2 className="mt-2 text-2xl font-bold sm:text-3xl">O que o Finanças e Produtividade faz</h2>
       <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((f, index) => <article key={f.title} className="glass rounded-2xl p-5">
           <span aria-hidden="true" className="text-xs font-semibold text-neon">0{index + 1}</span>
@@ -580,7 +564,7 @@ function VideoSection() {
       </div>
       <figure className="w-full">
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-neon/20 bg-background [contain:layout_paint]">
-          <img src={financasFeatures.url} alt="Três telas do aplicativo Finanças e Produtividade: Rotina de Alta Performance, Consultor IA com projeção da meta principal e gráfico de distribuição de gastos por categoria." width={1920} height={1080} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+          <img src={financasFeatures.url} alt="Três telas do aplicativo Finanças e Produtividade: Rotina de Alta Performance, Consultor IA com projeção da meta principal e gráfico de distribuição de gastos por categoria." width={1920} height={1080} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
         </div>
         <figcaption className="mt-1.5 text-center text-[11px] text-muted-foreground">Dados de exemplo</figcaption>
       </figure>
@@ -618,7 +602,7 @@ function Guarantee() {
               Garantia de 7 dias pela Whop
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Você pode solicitar reembolso em até 7 dias pela Whop, conforme as condições da oferta e o procedimento da plataforma.
+              Para Finanças e Produtividade e Ironform, você pode solicitar reembolso em até 7 dias pela Whop, conforme as condições da oferta e o procedimento da plataforma.
             </p>
           </div>
         </div>
@@ -655,7 +639,7 @@ function Comparison() {
               <Check className="h-4 w-4 text-neon" strokeWidth={3} />
             </span>
             <span className="text-xs font-bold leading-tight text-neon sm:text-sm">
-              PWAs Cerne Lab
+              Finanças e Ironform
             </span>
           </div>
         </div>
@@ -694,7 +678,7 @@ function Faq() {
     <section id="faq" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
       <div className="mb-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">FAQ</p>
-        <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Dúvidas Gerais</h2>
+        <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Dúvidas sobre Finanças e Ironform</h2>
       </div>
       <Accordion type="single" collapsible className="mx-auto max-w-4xl border-y border-glass-border">
         {faqs.map((f, i) => (
@@ -772,7 +756,7 @@ function LegalDialog({ type }: { type: "terms" | "privacy" }) {
           </DialogTitle>
           <DialogDescription className="leading-relaxed">
             {isTerms
-              ? "Condições aplicáveis às licenças dos aplicativos PWA da Cerne Lab."
+              ? "Condições aplicáveis às licenças de Finanças e Produtividade e Ironform; não à oferta do Fluxo Vendas."
               : "Como os aplicativos da Cerne Lab tratam e protegem suas informações."}
           </DialogDescription>
         </DialogHeader>
