@@ -15,3 +15,5 @@
 - Use Vitest for frontend unit tests so test imports resolve during project checks.
 - Landing media uses a shared aspect-ratio container with null sources until verified assets arrive; this prevents placeholder text, misleading screens and layout shifts.
 - Landing feature publication uses explicit approval and a four-item limit in a browser-safe content module; this keeps undefined capabilities off the public page.
+- Fluxo Vendas contact destinations and commercial boundaries live in a browser-safe content module; this keeps lead generation separate from existing checkout offers.
+- Real Fluxo Vendas video loads only near the viewport and respects reduced motion, with a poster and pause control; this avoids unnecessary downloads and motion.
