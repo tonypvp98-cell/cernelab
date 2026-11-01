@@ -37,7 +37,13 @@ export function FluxoVideo() {
   };
 
   return <div className="relative mt-6 aspect-[1878/864] w-full overflow-hidden rounded-2xl border border-fluxo/30 bg-background">
-    <video ref={videoRef} src={fluxoVideo.url} poster={fluxoHero.url} autoPlay muted loop playsInline preload="auto" width={1878} height={864} aria-label="Gravação real do Fluxo Vendas" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} className="absolute inset-0 h-full w-full object-contain" />
+    <video ref={videoRef} src={fluxoVideo.url} poster={fluxoHero.url} autoPlay muted loop playsInline preload="auto" width={1878} height={864} aria-label="Gravação real do Fluxo Vendas" onPlay={(event) => {
+      if (!shouldPlayFluxoVideo(window.matchMedia("(prefers-reduced-motion: reduce)").matches, manualPlayback.current)) {
+        event.currentTarget.pause();
+        return;
+      }
+      setPlaying(true);
+    }} onPause={() => setPlaying(false)} className="absolute inset-0 h-full w-full object-contain" />
     <Button variant="outline" size="icon" onClick={toggle} aria-label={playing ? "Pausar demonstração" : "Reproduzir demonstração"} title={playing ? "Pausar demonstração" : "Reproduzir demonstração"} className="absolute bottom-2 right-2 border-fluxo/40 bg-background/90 text-fluxo">
       {playing ? <Pause /> : <Play />}
     </Button>
