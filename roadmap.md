@@ -21,3 +21,6 @@
 - [x] Revisar proporções e espaçamento preservando o visual existente
 - [x] Remover provisórios públicos e preparar mídia real sem telas artificiais
 - [x] Validar navegação, conteúdo e layout no celular, tablet e desktop
+- [ ] Integrar imagem e gravação reais do Fluxo Vendas e contato pelo Instagram
+- [ ] Organizar outros produtos e delimitar suas condições comerciais
+- [ ] Otimizar imagens e validar apresentação em 375, 390, 768 e 1366 px
