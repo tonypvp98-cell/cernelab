@@ -433,7 +433,7 @@ function ProductMedia({ product }: { product: Product }) {
     <figure className="w-full">
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-neon/25 bg-background [contain:layout_paint] sm:aspect-[16/10]">
         {product.demoVideo ? (
-          <video autoPlay loop muted playsInline preload="metadata" poster={product.cover ?? undefined} aria-label={`Demonstração do ${product.name}`} width={1024} height={640} className="absolute inset-0 h-full w-full object-contain">
+          <video autoPlay loop muted playsInline preload="auto" poster={product.cover ?? undefined} aria-label={`Demonstração do ${product.name}`} width={1024} height={640} className="absolute inset-0 h-full w-full object-contain">
             <source src={product.demoVideo} type="video/mp4" />
           </video>
         ) : product.cover ? (

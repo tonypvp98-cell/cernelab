@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Corrigir reprodução contínua do vídeo e verificar autoplay, rolagem e pausa manual
+
 - [x] Atualizar suporte e rodapé institucional
 - [x] Adicionar explicação do PWA em três passos
 - [x] Reestruturar preços promocionais dos produtos
