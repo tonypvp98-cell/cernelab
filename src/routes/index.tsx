@@ -54,6 +54,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: fluxoHero.url },
+      { name: "twitter:image", content: fluxoHero.url },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -154,9 +156,6 @@ const navigation = [
   { label: "FAQ", href: "#faq" },
 ];
 
-const MAIN_PRODUCT = products[0];
-if (!MAIN_PRODUCT) throw new Error("Main product is required");
-const MAIN_CHECKOUT = MAIN_PRODUCT.link;
 const pwaSteps = [
   {
     icon: Link2,
@@ -186,6 +185,8 @@ function Index() {
       <main className="relative">
         <Hero />
         <FluxoVendas />
+        <FluxoFaq />
+        <FinalCta />
         <Catalog items={products} id="aplicativos" eyebrow="Também da Cerne Lab" title="Outros produtos" />
         <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-sm leading-relaxed text-muted-foreground">{otherProductsScope}</p></div>
         <Features />
@@ -197,7 +198,6 @@ function Index() {
         <StorefrontTestimonials />
         <StorefrontChangelog />
         <Faq />
-        <FinalCta />
       </main>
 
       <Footer />
@@ -231,45 +231,24 @@ function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 lg:flex">
-        <Button asChild variant="outline" size="icon" className="glass shrink-0 rounded-md" title="Suporte via Instagram">
-          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Falar com a Cerne Lab pelo Instagram">
-            <Instagram className="text-neon" />
-          </a>
-        </Button>
         <Button
           asChild
           variant="outline"
           size="sm"
-          className="glass shrink-0 rounded-md border-gold/40 px-4 text-left font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
+          className="shrink-0 rounded-md border-fluxo/40 bg-fluxo/10 px-4 font-semibold text-fluxo hover:bg-fluxo/20 hover:text-fluxo"
         >
           <a
-            href="#aplicativos"
-            title="Conhecer Finanças e Produtividade e Ironform"
+            href={fluxoContact.direct}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <span className="flex flex-col leading-tight">
-              <span>Conhecer outros produtos</span>
+              <span>Quero conhecer o Fluxo Vendas</span>
               
             </span>
           </a>
         </Button>
         </div>
-        <Button
-          asChild
-          variant="outline"
-          size="sm"
-          className="glass shrink-0 rounded-md border-gold/40 max-w-40 whitespace-normal px-3 py-1.5 text-xs font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold lg:hidden"
-        >
-          <a
-            href="#aplicativos"
-            aria-label="Conhecer outros produtos"
-            title="Conhecer Finanças e Produtividade e Ironform"
-          >
-            <span className="flex flex-col leading-tight">
-              <span>Conhecer outros produtos</span>
-              
-            </span>
-          </a>
-        </Button>
         <Button
           variant="outline"
           size="icon"
@@ -291,11 +270,13 @@ function Header() {
               </a>
             ))}
             <a
-              href="#aplicativos"
+              href={fluxoContact.direct}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => { setIsMenuOpen(false); }}
-              className="mt-1 rounded-md border border-gold/40 px-3 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10"
+              className="mt-1 rounded-md border border-fluxo/40 px-3 py-2.5 text-sm font-semibold text-fluxo transition-colors hover:bg-fluxo/10"
             >
-              Conhecer outros produtos
+              Quero conhecer o Fluxo Vendas
             </a>
           </div>
         </nav>
@@ -305,40 +286,36 @@ function Header() {
 }
 
 const fluxoPillars = [
-  { title: "Vendas", text: "Como as vendas do comércio aparecem organizadas no painel." },
-  { title: "Faturamento", text: "Onde visualizar o faturamento do negócio." },
-  { title: "Lucro", text: "Como acompanhar o lucro das operações." },
-  { title: "Estoque", text: "Como as informações de estoque aparecem junto às vendas." },
+  { title: "Vendas", text: "Registre as vendas e consulte as informações no painel." },
+  { title: "Faturamento", text: "Acompanhe o faturamento do negócio em um só lugar." },
+  { title: "Margem de lucro", text: "Visualize a margem de lucro das operações." },
+  { title: "Estoque", text: "Acompanhe as informações de estoque junto às vendas." },
 ];
 
 function FluxoCta() {
-  return <div className="mt-6">
+  return <div className="mt-5">
     <Button asChild className="h-auto min-h-12 max-w-full whitespace-normal rounded-xl bg-fluxo px-5 py-3 text-sm font-semibold text-fluxo-foreground shadow-fluxo hover:bg-fluxo/90">
       <a href={fluxoContact.direct} target="_blank" rel="noopener noreferrer">Quero conhecer o Fluxo Vendas <ArrowUpRight className="h-4 w-4 shrink-0" /></a>
     </Button>
-    <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-muted-foreground">{fluxoContact.guidance}</p>
-    <a href={fluxoContact.profile} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs text-fluxo underline underline-offset-4">Abrir perfil no Instagram <ArrowUpRight className="h-3 w-3" /></a>
+    <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{fluxoContact.guidance}</p>
   </div>;
 }
 
 function Hero() {
   return (
-    <section id="fluxo-vendas" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-6 pt-6 sm:px-8 sm:pb-10 sm:pt-14">
-      <div className="mx-auto max-w-3xl text-center">
-        <p className="text-xs font-medium text-muted-foreground">Cerne Lab <span className="mx-1.5">/</span> <span className="font-semibold text-foreground">Fluxo Vendas</span></p>
-        <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-fluxo/30 bg-fluxo/10 px-3 py-1 text-xs font-semibold text-fluxo">
-          <span className="h-1.5 w-1.5 rounded-full bg-fluxo" /> Pré-lançamento · Acesso antecipado
-        </span>
-        <h1 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
-          Mais clareza para acompanhar as <span className="text-fluxo">vendas do seu negócio.</span>
+    <section id="fluxo-vendas" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-5 pt-5 sm:px-8 sm:pb-8 sm:pt-8">
+      <div className="mx-auto max-w-4xl text-center">
+        <p className="text-lg font-bold text-fluxo">Fluxo Vendas <span className="ml-2 text-xs font-medium text-muted-foreground">por Cerne Lab</span></p>
+        <h1 className="mt-3 text-[28px] font-extrabold leading-tight sm:text-[40px]">
+          Tenha suas vendas e os números do seu negócio <span className="text-fluxo">em um só lugar.</span>
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Acompanhe informações de vendas, faturamento, lucro e estoque em uma interface organizada.
+        <p className="mx-auto mt-3 max-w-2xl text-base font-medium leading-relaxed text-muted-foreground">
+          Registre vendas e acompanhe faturamento, margem de lucro e estoque em um painel simples e organizado.
         </p>
         <FluxoCta />
       </div>
-      <div className="mx-auto mt-8 max-w-5xl rounded-3xl border border-fluxo/20 bg-fluxo-surface/5 p-2 shadow-fluxo sm:p-3">
-        <img src={fluxoHero.url} alt="Fluxo Vendas: painel, vendas e controle de estoque" width={1920} height={1080} loading="eager" fetchPriority="high" decoding="async" className="aspect-video w-full rounded-2xl object-contain" />
+      <div className="mx-auto mt-5 max-w-5xl overflow-hidden rounded-2xl border border-fluxo/20 bg-background">
+        <img src={fluxoHero.url} alt="Telas reais do Fluxo Vendas: registro de vendas, faturamento, margem de lucro e controle de estoque" width={1920} height={1080} loading="eager" fetchPriority="high" decoding="async" className="aspect-video w-full object-contain" />
       </div>
     </section>
   );
@@ -346,9 +323,13 @@ function Hero() {
 
 function FluxoVendas() {
   return (
-    <section id="demonstracao-fluxo" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-10">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-fluxo">Na demonstração</p>
-      <h2 className="mt-2 text-2xl font-bold sm:text-3xl">O que você poderá conhecer</h2>
+    <section id="demonstracao-fluxo" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-8">
+      <div className="border-y border-glass-border py-5">
+        <p className="text-xs font-semibold uppercase text-fluxo">Sua operação, organizada</p>
+        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Menos informações espalhadas</h2>
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-muted-foreground">Quando vendas, faturamento e estoque ficam separados, acompanhar o negócio exige consultar várias informações. O Fluxo Vendas reúne esses números em um painel para facilitar essa consulta.</p>
+      </div>
+      <h2 className="mt-6 text-2xl font-bold sm:text-3xl">O que você pode acompanhar</h2>
       <ul className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
         {fluxoPillars.map((p) => (
           <li key={p.title} className="flex gap-3 border-t border-glass-border pt-4">
@@ -357,7 +338,17 @@ function FluxoVendas() {
           </li>
         ))}
       </ul>
-      <FluxoVideo />
+      <div className="mt-7">
+        <p className="text-xs font-semibold uppercase text-fluxo">Demonstração real</p>
+        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Veja o Fluxo Vendas em ação</h2>
+        <FluxoVideo />
+      </div>
+      <div className="mt-6 border-b border-glass-border pb-5">
+        <h2 className="text-2xl font-bold sm:text-3xl">Mais clareza na rotina</h2>
+        <ul className="mt-4 grid gap-3 text-sm font-medium leading-relaxed sm:grid-cols-3">
+          {["Consulte os números da operação no mesmo painel.", "Acompanhe vendas e estoque sem perder o contexto.", "Visualize faturamento e margem de lucro de forma organizada."].map((text) => <li key={text} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-fluxo" />{text}</li>)}
+        </ul>
+      </div>
     </section>
   );
 }
@@ -576,14 +567,8 @@ function FinalCta() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-8 text-center sm:px-8 sm:py-12">
       <div className="border-y border-glass-border py-7">
-        <h2 className="text-2xl font-bold sm:text-3xl">Comece hoje com o Finanças e Produtividade</h2>
-        <p className="mt-3 text-sm text-muted-foreground">Pagamento único • acesso vitalício • garantia de 7 dias pela Whop.</p>
-        <Button asChild className="btn-neon mt-6 h-12 rounded-full px-7 text-sm font-semibold">
-          <a href={MAIN_CHECKOUT} target="_blank" rel="noopener noreferrer">
-            Garantir acesso
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-        </Button>
+        <h2 className="text-2xl font-bold sm:text-3xl">Conheça o Fluxo Vendas</h2>
+        <FluxoCta />
       </div>
     </section>
   );
@@ -673,9 +658,28 @@ function Comparison() {
   );
 }
 
+function FluxoFaq() {
+  const items = [
+    { q: "O que é o Fluxo Vendas?", a: "É uma ferramenta para registrar vendas e acompanhar faturamento, margem de lucro e estoque em um painel simples e organizado." },
+    { q: "Como posso conhecer o produto?", a: "Clique em “Quero conhecer o Fluxo Vendas” para conversar com a Cerne Lab pelo Instagram e solicitar uma demonstração." },
+    { q: "Como consultar preços e condições de acesso?", a: "A oferta comercial do Fluxo Vendas está em definição. Converse com a Cerne Lab pelo Instagram para conhecer as condições disponíveis. As ofertas de Finanças e Produtividade e Ironform são separadas." },
+  ];
+  return <section id="faq" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-8">
+    <p className="text-xs font-semibold uppercase text-fluxo">Perguntas frequentes</p>
+    <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Dúvidas sobre o Fluxo Vendas</h2>
+    <Accordion type="single" collapsible className="mt-5 border-y border-glass-border">
+      {items.map((item, index) => <AccordionItem key={item.q} value={`fluxo-${index}`} className="border-glass-border last:border-b-0">
+        <AccordionTrigger className="py-4 text-left text-base font-semibold hover:no-underline [&>svg]:text-fluxo">{item.q}</AccordionTrigger>
+        <AccordionContent className="text-sm leading-relaxed text-muted-foreground">{item.a}</AccordionContent>
+      </AccordionItem>)}
+    </Accordion>
+    <a href={fluxoContact.profile} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-fluxo underline underline-offset-4">Prefere abrir o perfil no Instagram? <ArrowUpRight className="h-4 w-4" /></a>
+  </section>;
+}
+
 function Faq() {
   return (
-    <section id="faq" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+    <section id="faq-outros" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
       <div className="mb-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">FAQ</p>
         <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Dúvidas sobre Finanças e Ironform</h2>

@@ -1,6 +1,9 @@
 # Roadmap
 
-- [ ] Corrigir reprodução contínua do vídeo e verificar autoplay, rolagem e pausa manual
+- [x] Corrigir reprodução contínua do vídeo e verificar autoplay, rolagem e pausa manual
+- [x] Refinar primeira dobra do Fluxo Vendas e contato consistente pelo Instagram
+- [x] Organizar problema, recursos, demonstração, benefícios e FAQ do Fluxo Vendas
+- [x] Validar celular e desktop e apresentar comparação visual antes/depois
 
 - [x] Atualizar suporte e rodapé institucional
 - [x] Adicionar explicação do PWA em três passos
