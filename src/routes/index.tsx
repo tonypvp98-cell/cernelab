@@ -237,9 +237,8 @@ function Header() {
         <div className="hidden items-center gap-2 lg:flex">
         <Button
           asChild
-          variant="outline"
           size="sm"
-          className="btn-neon shrink-0 border-0 px-5 font-semibold"
+          className="h-10 shrink-0 px-5 font-semibold"
         >
           <a
             href={fluxoContact.direct}
