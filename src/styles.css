@@ -65,6 +65,12 @@
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Playfair Display", ui-sans-serif, system-ui, sans-serif;
   --color-neon: var(--neon);
+  --color-amber: var(--amber);
+  --color-amber-deep: var(--amber-deep);
+  --color-skin: var(--skin);
+  --color-light: var(--light);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-neon-glow: var(--neon-glow);
   --color-glass: var(--glass);
   --color-glass-border: var(--glass-border);
