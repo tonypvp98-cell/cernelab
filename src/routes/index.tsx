@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Check,
   X,
@@ -177,27 +177,27 @@ const pwaSteps = [
 function Index() {
   return (
     <div id="top" className="relative min-h-screen overflow-x-clip bg-background text-foreground">
-      {/* Technical grid */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[720px] bg-tech-grid" />
 
       <Header />
 
       <main className="relative">
-        <Hero />
-        <FluxoVendas />
-        <FluxoFaq />
-        <FinalCta />
-        <Catalog items={products} id="aplicativos" eyebrow="Também da Cerne Lab" title="Outros produtos" />
-        <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-sm leading-relaxed text-muted-foreground">{otherProductsScope}</p></div>
-        <Features />
-        <VideoSection />
+        <Band><Hero /></Band>
+        <Band light><FluxoVendas /></Band>
+        <Band><FluxoFaq /></Band>
+        <Band light><FinalCta /></Band>
+        <Band>
+          <Catalog items={products} id="aplicativos" eyebrow="Também da Cerne Lab" title={<>Outros <em>produtos</em></>} />
+          <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-sm leading-relaxed text-muted-foreground">{otherProductsScope}</p></div>
+        </Band>
+        <Band light><Features /></Band>
+        <Band><VideoSection /></Band>
         <StorefrontBundles />
-        <PwaAdvantages />
-        <HowItWorks />
-        <Guarantee />
+        <Band light><PwaAdvantages /></Band>
+        <Band><HowItWorks /></Band>
+        <Band light><Guarantee /></Band>
         <StorefrontTestimonials />
         <StorefrontChangelog />
-        <Faq />
+        <Band><Faq /></Band>
       </main>
 
       <Footer />
@@ -205,22 +205,26 @@ function Index() {
   );
 }
 
+function Band({ light = false, children }: { light?: boolean; children: ReactNode }) {
+  return <div className={`${light ? "band-light" : "band-dark"} py-10 sm:py-16 lg:py-20`}><div className="reveal">{children}</div></div>;
+}
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-glass-border bg-background/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-glass-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-5 py-2 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-5">
         <a href="#top" className="flex min-w-0 items-center gap-2.5" onClick={() => setIsMenuOpen(false)}>
           <img
             src={cerneLogo}
             alt="Logotipo da Cerne Lab"
-            className="h-9 w-auto shrink-0"
+            className="h-9 w-auto shrink-0 brightness-0 invert"
             width={209}
             height={256}
           />
           <span className="truncate text-base font-bold">
-            Cerne<span className="text-neon"> Lab</span>
+            Cerne Lab
           </span>
         </a>
         <nav aria-label="Navegação principal" className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex">
@@ -233,9 +237,8 @@ function Header() {
         <div className="hidden items-center gap-2 lg:flex">
         <Button
           asChild
-          variant="outline"
           size="sm"
-          className="shrink-0 rounded-md border-fluxo/40 bg-fluxo/10 px-4 font-semibold text-fluxo hover:bg-fluxo/20 hover:text-fluxo"
+          className="h-10 shrink-0 px-5 font-semibold"
         >
           <a
             href={fluxoContact.direct}
@@ -252,7 +255,7 @@ function Header() {
         <Button
           variant="outline"
           size="icon"
-          className="glass shrink-0 rounded-md lg:hidden"
+          className="glass shrink-0 rounded-full lg:hidden"
           aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={isMenuOpen}
           aria-controls="menu-mobile"
@@ -274,7 +277,7 @@ function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => { setIsMenuOpen(false); }}
-              className="mt-1 rounded-md border border-fluxo/40 px-3 py-2.5 text-sm font-semibold text-fluxo transition-colors hover:bg-fluxo/10"
+              className="btn-neon mt-2 px-4 py-3 text-center text-sm font-semibold"
             >
               Quero conhecer o Fluxo Vendas
             </a>
@@ -294,7 +297,7 @@ const fluxoPillars = [
 
 function FluxoCta() {
   return <div className="mt-5">
-    <Button asChild className="h-auto min-h-12 max-w-full whitespace-normal rounded-xl bg-fluxo px-5 py-3 text-sm font-semibold text-fluxo-foreground shadow-fluxo hover:bg-fluxo/90">
+    <Button asChild className="h-auto min-h-12 max-w-full whitespace-normal btn-neon px-6 py-3 text-sm font-semibold">
       <a href={fluxoContact.direct} target="_blank" rel="noopener noreferrer">Quero conhecer o Fluxo Vendas <ArrowUpRight className="h-4 w-4 shrink-0" /></a>
     </Button>
     <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{fluxoContact.guidance}</p>
@@ -307,14 +310,14 @@ function Hero() {
       <div className="mx-auto max-w-4xl text-center">
         <p className="text-lg font-bold text-fluxo">Fluxo Vendas <span className="ml-2 text-xs font-medium text-muted-foreground">por Cerne Lab</span></p>
         <h1 className="mt-3 text-[28px] font-extrabold leading-tight sm:text-[40px]">
-          Tenha suas vendas e os números do seu negócio <span className="text-fluxo">em um só lugar.</span>
+          Tenha suas vendas e os números do seu negócio <em>em um só lugar.</em>
         </h1>
         <p className="mx-auto mt-3 max-w-2xl text-base font-medium leading-relaxed text-muted-foreground">
           Registre vendas e acompanhe faturamento, margem de lucro e estoque em um painel simples e organizado.
         </p>
         <FluxoCta />
       </div>
-      <div className="mx-auto mt-5 max-w-5xl overflow-hidden rounded-2xl border border-fluxo/20 bg-background">
+      <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-[20px] border border-glass-border bg-surface">
         <img src={fluxoHero.url} alt="Telas reais do Fluxo Vendas: registro de vendas, faturamento, margem de lucro e controle de estoque" width={1920} height={1080} loading="eager" fetchPriority="high" decoding="async" className="aspect-video w-full object-contain" />
       </div>
     </section>
@@ -326,10 +329,10 @@ function FluxoVendas() {
     <section id="demonstracao-fluxo" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-8">
       <div className="border-y border-glass-border py-5">
         <p className="text-xs font-semibold uppercase text-fluxo">Sua operação, organizada</p>
-        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Menos informações espalhadas</h2>
+        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Menos informações <em>espalhadas</em></h2>
         <p className="mt-3 max-w-3xl text-base leading-relaxed text-muted-foreground">Quando vendas, faturamento e estoque ficam separados, acompanhar o negócio exige consultar várias informações. O Fluxo Vendas reúne esses números em um painel para facilitar essa consulta.</p>
       </div>
-      <h2 className="mt-6 text-2xl font-bold sm:text-3xl">O que você pode acompanhar</h2>
+      <h2 className="mt-6 text-2xl font-bold sm:text-3xl">O que você pode <em>acompanhar</em></h2>
       <ul className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
         {fluxoPillars.map((p) => (
           <li key={p.title} className="flex gap-3 border-t border-glass-border pt-4">
@@ -340,11 +343,11 @@ function FluxoVendas() {
       </ul>
       <div className="mt-7">
         <p className="text-xs font-semibold uppercase text-fluxo">Demonstração real</p>
-        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Veja o Fluxo Vendas em ação</h2>
+        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Veja o Fluxo Vendas em <em>ação</em></h2>
         <FluxoVideo />
       </div>
       <div className="mt-6 border-b border-glass-border pb-5">
-        <h2 className="text-2xl font-bold sm:text-3xl">Mais clareza na rotina</h2>
+        <h2 className="text-2xl font-bold sm:text-3xl">Mais <em>clareza</em> na rotina</h2>
         <ul className="mt-4 grid gap-3 text-sm font-medium leading-relaxed sm:grid-cols-3">
           {["Consulte os números da operação no mesmo painel.", "Acompanhe vendas e estoque sem perder o contexto.", "Visualize faturamento e margem de lucro de forma organizada."].map((text) => <li key={text} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-fluxo" />{text}</li>)}
         </ul>
@@ -353,7 +356,7 @@ function FluxoVendas() {
   );
 }
 
-function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; eyebrow: string; title: string }) {
+function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; eyebrow: string; title: ReactNode }) {
   const visibleProducts = items;
   return (
     <section id={id} className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
@@ -397,7 +400,7 @@ function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; 
               </div>
 
               <div className="mt-5 grid gap-3">
-              <Button asChild className="btn-neon h-12 w-full rounded-xl text-sm font-semibold">
+              <Button asChild className="btn-neon h-12 w-full text-sm font-semibold">
               <a
                 href={p.link}
                 target="_blank"
@@ -422,7 +425,7 @@ function ProductMedia({ product }: { product: Product }) {
   }
   return (
     <figure className="w-full">
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-neon/25 bg-background [contain:layout_paint] sm:aspect-[16/10]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-glass-border bg-background [contain:layout_paint] sm:aspect-[16/10]">
         {product.demoVideo ? (
           <video autoPlay loop muted playsInline preload="auto" poster={product.cover ?? undefined} aria-label={`Demonstração do ${product.name}`} width={1024} height={640} className="absolute inset-0 h-full w-full object-contain">
             <source src={product.demoVideo} type="video/mp4" />
@@ -445,7 +448,7 @@ function PwaAdvantages() {
       <div className="mb-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Por que PWA</p>
         <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
-          O formato certo para o seu dia a dia
+          O formato certo para o seu <em>dia a dia</em>
         </h2>
         <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           O PWA roda pelo navegador e pode ser adicionado à tela inicial, sem download de loja. O uso de armazenamento depende dos dados salvos pelo aplicativo.
@@ -473,7 +476,7 @@ function HowItWorks() {
       <div className="border-y border-glass-border py-6">
         <div className="mb-5 max-w-xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Como funciona</p>
-          <h3 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Ironform: da compra à sua tela</h3>
+          <h3 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Ironform: da compra à sua <em>tela</em></h3>
         </div>
         <ol className="grid gap-4 sm:grid-cols-3">
           {pwaSteps.map(({ icon: Icon, title, text }, index) => (
@@ -533,7 +536,7 @@ function Features() {
   return (
     <section id="o-que-o-app-faz" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
       <p className="text-xs font-semibold uppercase text-neon">Funcionalidades</p>
-      <h2 className="mt-2 text-2xl font-bold sm:text-3xl">O que o Finanças e Produtividade faz</h2>
+      <h2 className="mt-2 text-2xl font-bold sm:text-3xl">O que o Finanças e Produtividade <em>faz</em></h2>
       <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((f, index) => <article key={f.title} className="glass rounded-2xl p-5">
           <span aria-hidden="true" className="text-xs font-semibold text-neon">0{index + 1}</span>
@@ -551,10 +554,10 @@ function VideoSection() {
     <section id="video" className="mx-auto grid max-w-7xl scroll-mt-24 items-center gap-5 px-5 py-8 sm:px-8 sm:py-12 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12">
       <div className="min-w-0">
         <p className="text-xs font-semibold uppercase text-neon">Demonstração</p>
-        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Produtividade em ação</h2>
+        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Produtividade em <em>ação</em></h2>
       </div>
       <figure className="w-full">
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-neon/20 bg-background [contain:layout_paint]">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-glass-border bg-background [contain:layout_paint]">
           <img src={financasFeatures.url} alt="Três telas do aplicativo Finanças e Produtividade: Rotina de Alta Performance, Consultor IA com projeção da meta principal e gráfico de distribuição de gastos por categoria." width={1920} height={1080} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
         </div>
         <figcaption className="mt-1.5 text-center text-[11px] text-muted-foreground">Dados de exemplo</figcaption>
@@ -567,7 +570,7 @@ function FinalCta() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-8 text-center sm:px-8 sm:py-12">
       <div className="border-y border-glass-border py-7">
-        <h2 className="text-2xl font-bold sm:text-3xl">Conheça o Fluxo Vendas</h2>
+        <h2 className="text-2xl font-bold sm:text-3xl"><em>Conheça</em> o Fluxo Vendas</h2>
         <FluxoCta />
       </div>
     </section>
@@ -584,7 +587,7 @@ function Guarantee() {
           </span>
           <div className="min-w-0">
             <h2 className="text-2xl font-bold sm:text-3xl">
-              Garantia de 7 dias pela Whop
+              Garantia de <em>7 dias</em> pela Whop
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
               Para Finanças e Produtividade e Ironform, você pode solicitar reembolso em até 7 dias pela Whop, conforme as condições da oferta e o procedimento da plataforma.
@@ -602,7 +605,7 @@ function Comparison() {
       <div className="mb-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Comparativo</p>
         <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
-          Por que escolher a Cerne Lab
+          Por que escolher a <em>Cerne Lab</em>
         </h2>
       </div>
 
@@ -666,7 +669,7 @@ function FluxoFaq() {
   ];
   return <section id="faq" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-8">
     <p className="text-xs font-semibold uppercase text-fluxo">Perguntas frequentes</p>
-    <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Dúvidas sobre o Fluxo Vendas</h2>
+    <h2 className="mt-2 text-2xl font-bold sm:text-3xl"><em>Dúvidas</em> sobre o Fluxo Vendas</h2>
     <Accordion type="single" collapsible className="mt-5 border-y border-glass-border">
       {items.map((item, index) => <AccordionItem key={item.q} value={`fluxo-${index}`} className="border-glass-border last:border-b-0">
         <AccordionTrigger className="py-4 text-left text-base font-semibold hover:no-underline [&>svg]:text-fluxo">{item.q}</AccordionTrigger>
@@ -682,7 +685,7 @@ function Faq() {
     <section id="faq-outros" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
       <div className="mb-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">FAQ</p>
-        <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Dúvidas sobre Finanças e Ironform</h2>
+        <h2 className="mt-2 text-3xl font-bold sm:text-4xl"><em>Dúvidas</em> sobre Finanças e Ironform</h2>
       </div>
       <Accordion type="single" collapsible className="mx-auto max-w-4xl border-y border-glass-border">
         {faqs.map((f, i) => (
@@ -706,12 +709,12 @@ function Faq() {
 
 function Footer() {
   return (
-    <footer className="mt-4 border-t border-glass-border">
+    <footer className="border-t border-glass-border bg-background">
       <div className="mx-auto grid max-w-7xl gap-6 px-5 py-7 text-sm text-muted-foreground sm:grid-cols-[1fr_auto] sm:px-8">
         <div>
           <div className="flex items-center gap-2.5 text-foreground">
-            <img src={cerneLogo} alt="" className="h-9 w-auto" width={209} height={256} />
-            <span className="font-bold">Cerne <span className="text-neon">Lab</span></span>
+            <img src={cerneLogo} alt="" className="h-9 w-auto brightness-0 invert" width={209} height={256} />
+            <span className="font-bold">Cerne Lab</span>
           </div>
           <a href="mailto:contato@cernelab.com" className="mt-4 inline-flex items-center gap-2 transition-colors hover:text-neon">
             <Mail className="h-4 w-4" />

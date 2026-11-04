@@ -36,7 +36,7 @@ export function FluxoVideo() {
     else video.pause();
   };
 
-  return <div className="relative mt-6 aspect-[1878/864] w-full overflow-hidden rounded-2xl border border-fluxo/30 bg-background">
+  return <div className="relative mt-6 aspect-[1878/864] w-full overflow-hidden rounded-2xl border border-glass-border bg-background">
     <video ref={videoRef} src={fluxoVideo.url} poster={fluxoHero.url} autoPlay muted loop playsInline preload="auto" width={1878} height={864} aria-label="Gravação real do Fluxo Vendas" onPlay={(event) => {
       if (!shouldPlayFluxoVideo(window.matchMedia("(prefers-reduced-motion: reduce)").matches, manualPlayback.current)) {
         event.currentTarget.pause();
