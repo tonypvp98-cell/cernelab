@@ -213,7 +213,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-glass-border bg-background/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-glass-border bg-background">
       <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-5 py-2 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-5">
         <a href="#top" className="flex min-w-0 items-center gap-2.5" onClick={() => setIsMenuOpen(false)}>
           <img
@@ -433,7 +433,7 @@ function ProductMedia({ product }: { product: Product }) {
         ) : product.cover ? (
           <picture>
             {product.coverMobile && <source media="(max-width: 640px)" srcSet={product.coverMobile} width={1200} height={900} />}
-            <img src={product.demoGif ?? product.cover} alt={product.alt} width={1600} height={1000} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
+            <img src={product.demoGif ?? product.cover} alt={product.alt} width={1600} height={1000} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
           </picture>
         ) : null}
       </div>
