@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Ajustar lacunas e espaçamentos internos preservando conteúdo e cores
+
 - [x] Compactar seções e ampliar mockups, títulos e textos sem mudar conteúdo ou cores
 - [x] Conferir proporções e navegação no computador e no celular
 

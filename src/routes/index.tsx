@@ -54,8 +54,6 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: fluxoHero.url },
-      { name: "twitter:image", content: fluxoHero.url },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -187,7 +185,7 @@ function Index() {
         <Band light><FinalCta /></Band>
         <Band>
           <Catalog items={products} id="aplicativos" eyebrow="Também da Cerne Lab" title={<>Outros <em>produtos</em></>} />
-          <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-lg leading-relaxed text-muted-foreground sm:text-xl">{otherProductsScope}</p></div>
+          <div className="mx-auto mt-5 max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-lg leading-relaxed text-muted-foreground sm:text-xl">{otherProductsScope}</p></div>
         </Band>
         <Band light><Features /></Band>
         <Band><VideoSection /></Band>
@@ -214,7 +212,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-glass-border bg-background">
-      <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-5 py-2 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-5">
+      <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-5 py-2 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-5">
         <a href="#top" className="flex min-w-0 items-center gap-2.5" onClick={() => setIsMenuOpen(false)}>
           <img
             src={cerneLogo}
@@ -317,7 +315,7 @@ function Hero() {
         </p>
         <FluxoCta />
       </div>
-      <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-[20px] border border-glass-border bg-surface">
+      <div className="mx-auto mt-6 max-w-5xl overflow-hidden rounded-[20px] border border-glass-border bg-surface">
         <img src={fluxoHero.url} alt="Telas reais do Fluxo Vendas: registro de vendas, faturamento, margem de lucro e controle de estoque" width={1920} height={1080} loading="eager" fetchPriority="high" decoding="async" className="aspect-video w-full object-contain" />
       </div>
     </section>
@@ -327,7 +325,7 @@ function Hero() {
 function FluxoVendas() {
   return (
     <section id="demonstracao-fluxo" className="mx-auto max-w-5xl scroll-mt-24 px-5 sm:px-8">
-      <div className="border-y border-glass-border py-5">
+      <div className="border-b border-glass-border pb-5">
         <p className="text-xs font-semibold uppercase text-fluxo">Sua operação, organizada</p>
         <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Menos informações <em>espalhadas</em></h2>
         <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">Quando vendas, faturamento e estoque ficam separados, acompanhar o negócio exige consultar várias informações. O Fluxo Vendas reúne esses números em um painel para facilitar essa consulta.</p>
@@ -375,7 +373,7 @@ function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; 
           <article
             key={p.name}
             id={p.name === "Ironform" ? "ironform" : "financas-produtividade"}
-            className="glass flex scroll-mt-24 flex-col overflow-hidden rounded-2xl md:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
+            className="glass flex scroll-mt-24 flex-col overflow-hidden rounded-2xl lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
           >
             <div className="relative flex min-w-0 items-center border-b border-glass-border bg-secondary/20 lg:border-b-0 lg:border-r">
               <ProductMedia product={p} />
@@ -473,7 +471,7 @@ function PwaAdvantages() {
 function HowItWorks() {
   return (
     <section id="como-funciona" className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
-      <div className="border-y border-glass-border py-6">
+      <div>
         <div className="mb-5 max-w-xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Como funciona</p>
           <h3 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Ironform: da compra à sua <em>tela</em></h3>
@@ -569,7 +567,7 @@ function VideoSection() {
 function FinalCta() {
   return (
     <section className="mx-auto max-w-7xl px-5 text-center sm:px-8">
-      <div className="border-y border-glass-border py-7">
+      <div>
         <h2 className="text-2xl font-bold sm:text-3xl"><em>Conheça</em> o Fluxo Vendas</h2>
         <FluxoCta />
       </div>
