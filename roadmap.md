@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Compactar seções e ampliar mockups, títulos e textos sem mudar conteúdo ou cores
+- [x] Conferir proporções e navegação no computador e no celular
+
 - [x] Corrigir reprodução contínua do vídeo e verificar autoplay, rolagem e pausa manual
 - [x] Refinar primeira dobra do Fluxo Vendas e contato consistente pelo Instagram
 - [x] Organizar problema, recursos, demonstração, benefícios e FAQ do Fluxo Vendas

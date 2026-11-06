@@ -29,14 +29,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import ironformCover from "@/assets/ironform-cover.webp.asset.json";
+import ironformCover from "@/assets/ironform-compact.webp.asset.json";
 import fluxoHero from "@/assets/fluxo-vendas-hero.webp.asset.json";
 import { FluxoVideo } from "@/components/fluxo-video";
 import { fluxoContact, otherProductsScope } from "@/lib/fluxo-content";
 import { LandingMedia } from "@/components/landing-media";
-import financasMain from "@/assets/cernelab_financas_peca1_principal_1600x1000.webp.asset.json";
-import financasMainMobile from "@/assets/cernelab_financas_peca1_principal_mobile_1200x900.webp.asset.json";
-import financasFeatures from "@/assets/cernelab_financas_peca2_funcionalidades_1920x1080.webp.asset.json";
+import financasMain from "@/assets/financas-main-compact.webp.asset.json";
+import financasMainMobile from "@/assets/financas-mobile-compact.webp.asset.json";
+import financasFeatures from "@/assets/financas-action-compact.webp.asset.json";
 import { landingFeatures, visibleFeatures } from "@/lib/landing-content";
 import cerneLogo from "@/assets/cerne-logo.png";
 import { StorefrontBundles, StorefrontTestimonials, StorefrontChangelog } from "@/components/storefront-sections";
@@ -187,7 +187,7 @@ function Index() {
         <Band light><FinalCta /></Band>
         <Band>
           <Catalog items={products} id="aplicativos" eyebrow="Também da Cerne Lab" title={<>Outros <em>produtos</em></>} />
-          <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-sm leading-relaxed text-muted-foreground">{otherProductsScope}</p></div>
+          <div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="border-l-2 border-gold/40 pl-3 text-lg leading-relaxed text-muted-foreground sm:text-xl">{otherProductsScope}</p></div>
         </Band>
         <Band light><Features /></Band>
         <Band><VideoSection /></Band>
@@ -206,7 +206,7 @@ function Index() {
 }
 
 function Band({ light = false, children }: { light?: boolean; children: ReactNode }) {
-  return <div className={`${light ? "band-light" : "band-dark"} py-10 sm:py-16 lg:py-20`}><div className="reveal">{children}</div></div>;
+  return <div className={`${light ? "band-light" : "band-dark"} py-10 sm:py-12`}><div className="reveal">{children}</div></div>;
 }
 
 function Header() {
@@ -300,13 +300,13 @@ function FluxoCta() {
     <Button asChild className="h-auto min-h-12 max-w-full whitespace-normal btn-neon px-6 py-3 text-sm font-semibold">
       <a href={fluxoContact.direct} target="_blank" rel="noopener noreferrer">Quero conhecer o Fluxo Vendas <ArrowUpRight className="h-4 w-4 shrink-0" /></a>
     </Button>
-    <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{fluxoContact.guidance}</p>
+    <p className="mx-auto mt-2 max-w-md text-lg leading-relaxed text-muted-foreground sm:text-xl">{fluxoContact.guidance}</p>
   </div>;
 }
 
 function Hero() {
   return (
-    <section id="fluxo-vendas" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-5 pt-5 sm:px-8 sm:pb-8 sm:pt-8">
+    <section id="fluxo-vendas" className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
       <div className="mx-auto max-w-4xl text-center">
         <p className="text-lg font-bold text-fluxo">Fluxo Vendas <span className="ml-2 text-xs font-medium text-muted-foreground">por Cerne Lab</span></p>
         <h1 className="mt-3 text-[28px] font-extrabold leading-tight sm:text-[40px]">
@@ -326,18 +326,18 @@ function Hero() {
 
 function FluxoVendas() {
   return (
-    <section id="demonstracao-fluxo" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-8">
+    <section id="demonstracao-fluxo" className="mx-auto max-w-5xl scroll-mt-24 px-5 sm:px-8">
       <div className="border-y border-glass-border py-5">
         <p className="text-xs font-semibold uppercase text-fluxo">Sua operação, organizada</p>
         <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Menos informações <em>espalhadas</em></h2>
-        <p className="mt-3 max-w-3xl text-base leading-relaxed text-muted-foreground">Quando vendas, faturamento e estoque ficam separados, acompanhar o negócio exige consultar várias informações. O Fluxo Vendas reúne esses números em um painel para facilitar essa consulta.</p>
+        <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">Quando vendas, faturamento e estoque ficam separados, acompanhar o negócio exige consultar várias informações. O Fluxo Vendas reúne esses números em um painel para facilitar essa consulta.</p>
       </div>
       <h2 className="mt-6 text-2xl font-bold sm:text-3xl">O que você pode <em>acompanhar</em></h2>
       <ul className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
         {fluxoPillars.map((p) => (
           <li key={p.title} className="flex gap-3 border-t border-glass-border pt-4">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-fluxo" />
-            <div><h3 className="text-base font-bold">{p.title}</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{p.text}</p></div>
+            <div><h3 className="text-xl font-bold">{p.title}</h3><p className="mt-1 text-lg leading-relaxed text-muted-foreground sm:text-xl">{p.text}</p></div>
           </li>
         ))}
       </ul>
@@ -348,7 +348,7 @@ function FluxoVendas() {
       </div>
       <div className="mt-6 border-b border-glass-border pb-5">
         <h2 className="text-2xl font-bold sm:text-3xl">Mais <em>clareza</em> na rotina</h2>
-        <ul className="mt-4 grid gap-3 text-sm font-medium leading-relaxed sm:grid-cols-3">
+        <ul className="mt-4 grid gap-3 text-lg font-medium leading-relaxed sm:text-xl sm:grid-cols-3">
           {["Consulte os números da operação no mesmo painel.", "Acompanhe vendas e estoque sem perder o contexto.", "Visualize faturamento e margem de lucro de forma organizada."].map((text) => <li key={text} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-fluxo" />{text}</li>)}
         </ul>
       </div>
@@ -359,7 +359,7 @@ function FluxoVendas() {
 function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; eyebrow: string; title: ReactNode }) {
   const visibleProducts = items;
   return (
-    <section id={id} className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+    <section id={id} className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
       <div className="mb-5 grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">{eyebrow}</p>
@@ -375,24 +375,24 @@ function Catalog({ items, id, eyebrow, title }: { items: Product[]; id: string; 
           <article
             key={p.name}
             id={p.name === "Ironform" ? "ironform" : "financas-produtividade"}
-            className="glass flex scroll-mt-24 flex-col overflow-hidden rounded-2xl md:grid md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]"
+            className="glass flex scroll-mt-24 flex-col overflow-hidden rounded-2xl md:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
           >
-            <div className="relative flex min-w-0 items-center border-b border-glass-border bg-secondary/20 md:border-b-0 md:border-r">
+            <div className="relative flex min-w-0 items-center border-b border-glass-border bg-secondary/20 lg:border-b-0 lg:border-r">
               <ProductMedia product={p} />
             </div>
 
-            <div className="flex min-w-0 flex-1 flex-col p-5 lg:p-7">
+            <div className="flex min-w-0 flex-1 flex-col justify-center p-5 sm:p-7">
               <p className="mb-2 text-xs font-semibold text-neon">{p.category}</p>
-              <h3 className="text-2xl font-bold leading-tight">{p.name}</h3>
-              <p className="mt-2 text-sm font-medium text-muted-foreground">{p.tagline}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <h3 className="text-[32px] font-bold leading-tight sm:text-[40px]">{p.name}</h3>
+              <p className="mt-2 text-lg font-medium text-muted-foreground sm:text-xl">{p.tagline}</p>
+              <p className="mt-3 text-lg leading-relaxed text-muted-foreground sm:text-xl">
                 {p.description}
               </p>
 
               <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
                 <div className="min-w-0">
                   <p className="text-sm text-muted-foreground line-through">De {p.originalPrice}</p>
-                  <p className="mt-0.5 text-3xl font-extrabold text-neon">Por {p.price}</p>
+                  <p className="mt-0.5 text-[36px] font-extrabold leading-tight text-neon sm:text-[44px]">Por {p.price}</p>
                 </div>
                 <span className="rounded-md border border-neon/30 bg-neon/10 px-3 py-1.5 text-xs font-bold text-neon">
                   20% OFF — Acesso Vitalício
@@ -425,15 +425,15 @@ function ProductMedia({ product }: { product: Product }) {
   }
   return (
     <figure className="w-full">
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-glass-border bg-background [contain:layout_paint] sm:aspect-[16/10]">
+      <div className="relative w-full overflow-hidden bg-background [contain:layout_paint]">
         {product.demoVideo ? (
-          <video autoPlay loop muted playsInline preload="auto" poster={product.cover ?? undefined} aria-label={`Demonstração do ${product.name}`} width={1024} height={640} className="absolute inset-0 h-full w-full object-contain">
+          <video autoPlay loop muted playsInline preload="auto" poster={product.cover ?? undefined} aria-label={`Demonstração do ${product.name}`} width={1024} height={640} className="block h-auto w-full object-contain">
             <source src={product.demoVideo} type="video/mp4" />
           </video>
         ) : product.cover ? (
           <picture>
-            {product.coverMobile && <source media="(max-width: 640px)" srcSet={product.coverMobile} width={1200} height={900} />}
-            <img src={product.demoGif ?? product.cover} alt={product.alt} width={1600} height={1000} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
+            {product.coverMobile && <source media="(max-width: 640px)" srcSet={product.coverMobile} width={632} height={585} />}
+            <img src={product.demoGif ?? product.cover} alt={product.alt} width={product.name === "Ironform" ? 716 : 755} height={product.name === "Ironform" ? 579 : 728} loading="eager" decoding="async" className="block h-auto w-full object-contain" />
           </picture>
         ) : null}
       </div>
@@ -444,13 +444,13 @@ function ProductMedia({ product }: { product: Product }) {
 
 function PwaAdvantages() {
   return (
-    <section id="vantagens-pwa" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+    <section id="vantagens-pwa" className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
       <div className="mb-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Por que PWA</p>
         <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
           O formato certo para o seu <em>dia a dia</em>
         </h2>
-        <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+        <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
           O PWA roda pelo navegador e pode ser adicionado à tela inicial, sem download de loja. O uso de armazenamento depende dos dados salvos pelo aplicativo.
         </p>
       </div>
@@ -460,8 +460,8 @@ function PwaAdvantages() {
             <span className="grid h-11 w-11 place-items-center rounded-xl border border-neon/30 bg-neon/10 text-neon">
               <Icon className="h-5 w-5" />
             </span>
-            <h3 className="mt-3 text-lg font-semibold">{title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+            <h3 className="mt-3 text-2xl font-semibold">{title}</h3>
+            <p className="mt-2 text-lg leading-relaxed text-muted-foreground sm:text-xl">{text}</p>
           </div>
         ))}
       </div>
@@ -472,7 +472,7 @@ function PwaAdvantages() {
 
 function HowItWorks() {
   return (
-    <section id="como-funciona" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+    <section id="como-funciona" className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
       <div className="border-y border-glass-border py-6">
         <div className="mb-5 max-w-xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Como funciona</p>
@@ -489,9 +489,9 @@ function HowItWorks() {
               </span>
               <div className="min-w-0 sm:mt-5">
                 <p className="text-xs font-bold uppercase text-neon">Passo {index + 1}</p>
-                <h4 className="mt-1 text-lg font-semibold">{title}</h4>
+                <h4 className="mt-1 text-2xl font-semibold">{title}</h4>
                  {index === 1 ? (
-                    <div className="mt-3 grid gap-2 text-sm leading-relaxed text-muted-foreground">
+                    <div className="mt-3 grid gap-2 text-lg leading-relaxed text-muted-foreground sm:text-xl">
                       <div className="border-l border-neon/25 pl-3">
                         <p className="font-bold text-foreground">iOS</p>
                         <p>Compartilhar &gt; Adicionar à Tela de Início</p>
@@ -502,7 +502,7 @@ function HowItWorks() {
                       </div>
                    </div>
                  ) : (
-                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                   <p className="mt-2 text-lg leading-relaxed text-muted-foreground sm:text-xl">{text}</p>
                  )}
               </div>
             </li>
@@ -534,14 +534,14 @@ const comparisonRows = [
 function Features() {
   const items = visibleFeatures(landingFeatures);
   return (
-    <section id="o-que-o-app-faz" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+    <section id="o-que-o-app-faz" className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
       <p className="text-xs font-semibold uppercase text-neon">Funcionalidades</p>
       <h2 className="mt-2 text-2xl font-bold sm:text-3xl">O que o Finanças e Produtividade <em>faz</em></h2>
       <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((f, index) => <article key={f.title} className="glass rounded-2xl p-5">
           <span aria-hidden="true" className="text-xs font-semibold text-neon">0{index + 1}</span>
-          <h3 className="mt-3 text-base font-semibold">{f.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
+          <h3 className="mt-3 text-2xl font-semibold">{f.title}</h3>
+          <p className="mt-2 text-lg leading-relaxed text-muted-foreground sm:text-xl">{f.text}</p>
           {f.image && <LandingMedia src={f.image} alt={`Tela ${f.title}`} className="mt-4" />}
         </article>)}
       </div>
@@ -551,14 +551,14 @@ function Features() {
 
 function VideoSection() {
   return (
-    <section id="video" className="mx-auto grid max-w-7xl scroll-mt-24 items-center gap-5 px-5 py-8 sm:px-8 sm:py-12 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12">
+    <section id="video" className="mx-auto grid max-w-7xl scroll-mt-24 items-center gap-5 px-5 sm:px-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-8">
       <div className="min-w-0">
         <p className="text-xs font-semibold uppercase text-neon">Demonstração</p>
-        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">Finanças e Produtividade em <em>ação</em></h2>
+        <h2 className="mt-2 text-[36px] font-bold leading-[1.1] sm:text-[48px] lg:text-[56px] xl:text-[64px]">Finanças e Produtividade em <em>ação</em></h2>
       </div>
       <figure className="w-full">
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-glass-border bg-background [contain:layout_paint]">
-          <img src={financasFeatures.url} alt="Três telas do aplicativo Finanças e Produtividade: Rotina de Alta Performance, Consultor IA com projeção da meta principal e gráfico de distribuição de gastos por categoria." width={1920} height={1080} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
+        <div className="relative aspect-[966/626] w-full overflow-hidden rounded-2xl border border-glass-border bg-background [contain:layout_paint]">
+          <img src={financasFeatures.url} alt="Três telas do aplicativo Finanças e Produtividade: Rotina de Alta Performance, Consultor IA com projeção da meta principal e gráfico de distribuição de gastos por categoria." width={966} height={626} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-contain" />
         </div>
         <figcaption className="mt-1.5 text-center text-[11px] text-muted-foreground">Dados de exemplo</figcaption>
       </figure>
@@ -568,7 +568,7 @@ function VideoSection() {
 
 function FinalCta() {
   return (
-    <section className="mx-auto max-w-7xl px-5 py-8 text-center sm:px-8 sm:py-12">
+    <section className="mx-auto max-w-7xl px-5 text-center sm:px-8">
       <div className="border-y border-glass-border py-7">
         <h2 className="text-2xl font-bold sm:text-3xl"><em>Conheça</em> o Fluxo Vendas</h2>
         <FluxoCta />
@@ -579,7 +579,7 @@ function FinalCta() {
 
 function Guarantee() {
   return (
-    <section id="garantia" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+    <section id="garantia" className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
       <div className="glass relative overflow-hidden rounded-2xl border-neon/20 p-5 sm:p-7">
         <div className="relative flex flex-col items-start gap-6 sm:flex-row sm:items-center">
           <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl border border-neon/30 bg-neon/10 text-neon shadow-neon">
@@ -589,7 +589,7 @@ function Guarantee() {
             <h2 className="text-2xl font-bold sm:text-3xl">
               Garantia de <em>7 dias</em> pela Whop
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
               Para Finanças e Produtividade e Ironform, você pode solicitar reembolso em até 7 dias pela Whop, conforme as condições da oferta e o procedimento da plataforma.
             </p>
           </div>
@@ -645,13 +645,13 @@ function Comparison() {
             </div>
             <div className="flex items-center gap-2.5 p-4 sm:p-5">
               <X className="h-4 w-4 shrink-0 text-destructive" strokeWidth={3} />
-              <span className="text-xs leading-snug text-muted-foreground sm:text-sm">
+              <span className="text-base leading-snug text-muted-foreground sm:text-lg">
                 {row.common}
               </span>
             </div>
             <div className="flex items-center gap-2.5 border-l border-neon/20 bg-neon/10 p-4 sm:p-5">
               <Check className="h-4 w-4 shrink-0 text-neon" strokeWidth={3} />
-              <span className={`text-xs font-bold leading-snug sm:text-sm ${row.label === "Custo" ? "text-neon" : ""}`}>{row.cerne}</span>
+              <span className={`text-base font-bold leading-snug sm:text-lg ${row.label === "Custo" ? "text-neon" : ""}`}>{row.cerne}</span>
             </div>
           </div>
         ))}
@@ -667,13 +667,13 @@ function FluxoFaq() {
     { q: "Como posso conhecer o produto?", a: "Clique em “Quero conhecer o Fluxo Vendas” para conversar com a Cerne Lab pelo Instagram e solicitar uma demonstração." },
     { q: "Como consultar preços e condições de acesso?", a: "A oferta comercial do Fluxo Vendas está em definição. Converse com a Cerne Lab pelo Instagram para conhecer as condições disponíveis. As ofertas de Finanças e Produtividade e Ironform são separadas." },
   ];
-  return <section id="faq" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-6 sm:px-8 sm:py-8">
+  return <section id="faq" className="mx-auto max-w-5xl scroll-mt-24 px-5 sm:px-8">
     <p className="text-xs font-semibold uppercase text-fluxo">Perguntas frequentes</p>
     <h2 className="mt-2 text-2xl font-bold sm:text-3xl"><em>Dúvidas</em> sobre o Fluxo Vendas</h2>
     <Accordion type="single" collapsible className="mt-5 border-y border-glass-border">
       {items.map((item, index) => <AccordionItem key={item.q} value={`fluxo-${index}`} className="border-glass-border last:border-b-0">
-        <AccordionTrigger className="py-4 text-left text-base font-semibold hover:no-underline [&>svg]:text-fluxo">{item.q}</AccordionTrigger>
-        <AccordionContent className="text-sm leading-relaxed text-muted-foreground">{item.a}</AccordionContent>
+        <AccordionTrigger className="py-4 text-left text-lg font-semibold sm:text-xl hover:no-underline [&>svg]:text-fluxo">{item.q}</AccordionTrigger>
+        <AccordionContent className="text-lg leading-relaxed text-muted-foreground sm:text-xl">{item.a}</AccordionContent>
       </AccordionItem>)}
     </Accordion>
     <a href={fluxoContact.profile} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-fluxo underline underline-offset-4">Prefere abrir o perfil no Instagram? <ArrowUpRight className="h-4 w-4" /></a>
@@ -682,7 +682,7 @@ function FluxoFaq() {
 
 function Faq() {
   return (
-    <section id="faq-outros" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-8 sm:px-8 sm:py-12">
+    <section id="faq-outros" className="mx-auto max-w-7xl scroll-mt-24 px-5 sm:px-8">
       <div className="mb-5 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">FAQ</p>
         <h2 className="mt-2 text-3xl font-bold sm:text-4xl"><em>Dúvidas</em> sobre Finanças e Ironform</h2>
@@ -694,10 +694,10 @@ function Faq() {
             value={`item-${i}`}
             className="border-glass-border last:border-b-0"
           >
-            <AccordionTrigger className="py-5 text-left text-base font-semibold hover:no-underline [&>svg]:text-neon">
+            <AccordionTrigger className="py-5 text-left text-lg font-semibold sm:text-xl hover:no-underline [&>svg]:text-neon">
               {f.q}
             </AccordionTrigger>
-            <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+            <AccordionContent className="text-lg leading-relaxed text-muted-foreground sm:text-xl">
               {f.a}
             </AccordionContent>
           </AccordionItem>
@@ -776,7 +776,7 @@ function LegalDialog({ type }: { type: "terms" | "privacy" }) {
 
 function TermsContent() {
   return (
-    <div className="grid gap-5 text-sm leading-relaxed text-muted-foreground">
+    <div className="grid gap-5 text-lg leading-relaxed text-muted-foreground sm:text-xl">
       <section>
         <h3 className="font-semibold text-foreground">1. Licença de uso individual</h3>
         <p className="mt-1">A compra concede ao titular uma licença pessoal, individual, intransferível e não exclusiva para utilizar o aplicativo PWA adquirido.</p>
@@ -803,7 +803,7 @@ function TermsContent() {
 
 function PrivacyContent() {
   return (
-    <div className="grid gap-5 text-sm leading-relaxed text-muted-foreground">
+    <div className="grid gap-5 text-lg leading-relaxed text-muted-foreground sm:text-xl">
       <section>
         <h3 className="font-semibold text-foreground">1. Armazenamento local</h3>
         <p className="mt-1">Os dados inseridos nos aplicativos são armazenados localmente no dispositivo do usuário. A Cerne Lab não recebe, visualiza ou mantém uma cópia desses dados.</p>

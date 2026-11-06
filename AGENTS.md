@@ -17,3 +17,4 @@
 - Landing feature publication uses explicit approval and a four-item limit in a browser-safe content module; this keeps undefined capabilities off the public page.
 - Fluxo Vendas contact destinations and commercial boundaries live in a browser-safe content module; this keeps lead generation separate from existing checkout offers.
 - Real Fluxo Vendas video keeps a stable source and mounted node with automatic preloading and scroll-independent autoplay; preserve reduced-motion support, its poster and manual pause control so scrolling never resets playback.
+- Landing section spacing is owned by Band, not stacked with section padding; product media uses tightly cropped real assets at intrinsic aspect ratios to preserve complete screens and stable layout.
