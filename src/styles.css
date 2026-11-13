@@ -64,6 +64,8 @@
 @theme inline {
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Playfair Display", ui-sans-serif, system-ui, sans-serif;
+  --color-finance: var(--finance);
+  --shadow-product: 0 16px 40px -24px var(--product-shadow);
   --color-neon: var(--neon);
   --color-amber: var(--amber);
   --color-amber-deep: var(--amber-deep);
@@ -89,15 +91,17 @@
 /* Warm dark theme */
 :root {
   --radius: 12px;
-  --bg: oklch(0.18 0 0); /* #121212 */
-  --surface: oklch(0.25 0.017 50); /* #2A211C */
-  --surface-2: oklch(0.31 0.02 50); /* #3A2E28 */
-  --light: oklch(0.93 0.025 75); /* #F1E6D6 */
+  --bg: oklch(0.145 0.002 70);
+  --surface: oklch(0.195 0.002 70);
+  --surface-2: oklch(0.235 0.002 70);
+  --light: oklch(0.98 0 0);
   --skin: oklch(0.85 0.06 65); /* #E8C9A6 */
-  --amber: oklch(0.81 0.17 75); /* #FFB020 */
-  --amber-deep: oklch(0.7 0.16 65); /* #E08A00 */
-  --text: oklch(0.93 0.025 75); /* #F1E6D6 */
-  --muted-c: oklch(0.68 0.025 65); /* #A8998A */
+  --amber: oklch(0.74 0.185 50);
+  --amber-deep: oklch(0.65 0.185 45);
+  --text: oklch(0.96 0.002 70);
+  --muted-c: oklch(0.66 0.004 70);
+  --finance: oklch(0.79 0.145 145);
+  --product-shadow: oklch(0 0 0 / 45%);
   --kw: var(--skin);
 
   --background: var(--bg);
@@ -140,7 +144,7 @@
   --glass: var(--surface);
   --glass-border: oklch(1 0 0 / 6%);
   --success: var(--amber);
-  --fluxo: var(--amber);
+  --fluxo: oklch(0.76 0.155 163);
   --fluxo-foreground: var(--bg);
   --fluxo-surface: var(--light);
 }
@@ -182,9 +186,9 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
   }
 
   h1 em, h2 em, h3 em {
@@ -277,3 +281,28 @@
 .demo-progress::-webkit-progress-bar { background: var(--muted); }
 .demo-progress::-webkit-progress-value { background: var(--primary); }
 .demo-progress::-moz-progress-bar { background: var(--primary); }
+
+/* Ecosystem: neutral parent brand, independent product color scopes. */
+.page-container { width: min(100%, 1200px); margin-inline: auto; padding-inline: 24px; }
+.eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0; }
+.section-band, .product-section { padding-block: 64px; scroll-margin-top: 100px; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 32px; }
+.ecosystem-hero { padding-top: 60px; padding-bottom: 50px; }
+.hero-product-previews { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 20px; max-width: 940px; margin: 40px auto 0; align-items: center; }
+.hero-preview { display: block; min-width: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card); transition: border-color 200ms; }
+.hero-preview:hover { border-color: var(--primary); }
+.hero-preview-image { height: 240px; background: var(--background); }
+.product-fluxo-vendas { --primary: var(--fluxo); --ring: var(--fluxo); --amber-deep: oklch(0.66 0.15 163); --card: oklch(0.19 0.012 163); --background: oklch(0.145 0.008 163); --secondary: oklch(0.23 0.012 163); }
+.product-financas-metas { --primary: var(--finance); --ring: var(--finance); --amber-deep: oklch(0.68 0.14 145); --card: oklch(0.195 0.012 145); --background: oklch(0.145 0.008 145); --secondary: oklch(0.23 0.012 145); }
+.ecosystem-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card); scroll-margin-top: 100px; transition: border-color 200ms; }
+.ecosystem-card:hover { border-color: color-mix(in oklab, var(--primary) 45%, transparent); }
+.status-label { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; color: var(--muted-foreground); white-space: nowrap; }
+.product-symbol { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: color-mix(in oklab, var(--primary) 10%, transparent); color: var(--primary); }
+.product-card-preview { display: block; height: 260px; margin: 20px 0; background: var(--background); }
+.product-section { border-top: 1px solid var(--border); background: var(--background); }
+.demo-preview { aspect-ratio: 16 / 9; max-width: 960px; margin-inline: auto; overflow: hidden; border: 1px solid var(--border); border-radius: 8px; background: var(--background); }
+.finance-preview { aspect-ratio: 966 / 626; max-width: 760px; }
+.waitlist-band { background: color-mix(in oklab, var(--primary) 3%, var(--background)); }
+.mobile-waitlist { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+@media (min-width: 768px) { .page-container { padding-inline: 40px; } .ecosystem-hero { padding-top: 70px; } .section-band, .product-section { padding-block: 80px; } }
+@media (max-width: 639px) { .section-heading { align-items: start; flex-direction: column; gap: 16px; } .hero-product-previews { gap: 10px; grid-template-columns: 1fr 0.75fr; margin-top: 30px; } .hero-preview-image { height: 140px; } .hero-preview > div:first-child { padding: 10px; } .hero-preview span { font-size: 9px; gap: 4px; } .hero-preview svg { width: 12px; } .ecosystem-hero { padding-top: 44px; padding-bottom: 40px; } .product-card-preview { height: 240px; } }

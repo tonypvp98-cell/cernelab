@@ -1,5 +1,11 @@
 # Roadmap
 
+- [ ] Reposicionar a Cerne Lab com apenas Fluxo Vendas e Finanças & Metas
+- [ ] Criar demonstrações por abas, desenvolvimento, FAQ e navegação acessível
+- [ ] Implementar lista de espera protegida, consentimento, deduplicação e eventos com UTM
+- [ ] Validar cadastros reais, restrições de acesso e layouts
+- [ ] Configurar domínio remetente para confirmação por e-mail (depende do usuário)
+
 - [x] Ajustar lacunas e espaçamentos internos preservando conteúdo e cores
 
 - [x] Compactar seções e ampliar mockups, títulos e textos sem mudar conteúdo ou cores

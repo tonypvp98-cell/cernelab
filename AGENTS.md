@@ -15,6 +15,9 @@
 - Use Vitest for frontend unit tests so test imports resolve during project checks.
 - Landing media uses a shared aspect-ratio container with null sources until verified assets arrive; this prevents placeholder text, misleading screens and layout shifts.
 - Landing feature publication uses explicit approval and a four-item limit in a browser-safe content module; this keeps undefined capabilities off the public page.
-- Fluxo Vendas contact destinations and commercial boundaries live in a browser-safe content module; this keeps lead generation separate from existing checkout offers.
+- Ecosystem products, verified capabilities and editorial status live in a browser-safe content module; this keeps pre-launch positioning consistent across cards, tabs and development.
 - Real Fluxo Vendas video keeps a stable source and mounted node with automatic preloading and scroll-independent autoplay; preserve reduced-motion support, its poster and manual pause control so scrolling never resets playback.
-- Landing section spacing is owned by Band, not stacked with section padding; product media uses tightly cropped real assets at intrinsic aspect ratios to preserve complete screens and stable layout.
+- Ecosystem section spacing belongs to semantic section classes; real previews use stable aspect ratios and contain-fit to prevent overlap and layout shifts.
+- Waitlist writes use a validated CSRF-protected server function and a service-role-only atomic database function; no visitor can read or modify the email list directly.
+- Confirmation is a narrow server action with hashed expiring tokens; email sending remains optional until a real sender is configured, and launch campaigns require a dedicated marketing service.
+- Analytics uses non-personal browser events and signup UTM fields; no email address is included in tracking payloads.
