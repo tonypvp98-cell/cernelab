@@ -9,7 +9,9 @@ export const registerWaitlist = createServerFn({ method: 'POST' })
     const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
     const { data: signupId, error } = await supabaseAdmin.rpc('register_waitlist', {
       p_email: data.email, p_interests: data.interests,
-      p_source: data.utmSource, p_medium: data.utmMedium, p_campaign: data.utmCampaign,
+      ...(data.utmSource !== undefined ? { p_source: data.utmSource } : {}),
+      ...(data.utmMedium !== undefined ? { p_medium: data.utmMedium } : {}),
+      ...(data.utmCampaign !== undefined ? { p_campaign: data.utmCampaign } : {}),
     });
     if (error || !signupId) return { ok: false, emailStatus: 'unavailable' as const };
     const key = process.env['RESEND_API_KEY'];

@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Corrigir erros de compilação e verificar abertura da prévia
+
 - [ ] Reposicionar a Cerne Lab com apenas Fluxo Vendas e Finanças & Metas
 - [ ] Criar demonstrações por abas, desenvolvimento, FAQ e navegação acessível
 - [ ] Implementar lista de espera protegida, consentimento, deduplicação e eventos com UTM
